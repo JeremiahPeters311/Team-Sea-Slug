@@ -21,9 +21,6 @@ public class PlayerController : MonoBehaviour
     private float airHorizontalMoveSpeed;
 
     [SerializeField]
-    private bool _isGrounded = true;
-
-    [SerializeField]
     LayerMask groundLayer, platformLayer;
     [SerializeField]
     Transform groundCheck;
@@ -34,6 +31,9 @@ public class PlayerController : MonoBehaviour
     Vector2 _smoothMovementVelocity, _currentVelocityVector;
 
     float verticalDirection, horizontalVelocity;
+
+    [SerializeField]
+    GameObject _newspaperBulletPrefab;
 
     [SerializeField] private GameObject _playerReticle;
     private PlayerControls _playerControls;
@@ -231,6 +231,11 @@ public class PlayerController : MonoBehaviour
             platform = collision.gameObject.GetComponent<PassthroughPlatform>();
             platform.EnterPlatform();
         }
+        if (collision.gameObject.CompareTag("Projectile")) 
+        {
+            _playerControls.Disable();
+            GameManager.Instance.PlayerDamage();
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -244,6 +249,11 @@ public class PlayerController : MonoBehaviour
             platform.ExitPlatform();
             platform = null;
         }
+    }
+
+    public void EnableControls() 
+    {
+        _playerControls.Disable();
     }
 }
 
