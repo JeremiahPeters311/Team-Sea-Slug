@@ -1,8 +1,15 @@
+/******************************************************************
+ *    Author: Dalsten Yan
+ *    Contributors: Mitchell Young
+ *    Date Created: 2/8/25
+ *    Description: Player movement and teleport controls.
+ *******************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,15 +23,36 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     [Tooltip("Period of time to wait after the player gets hit to play an animation, before sending them to the start of the level or triggering the game over screen")]
     float _playerHitWaitDelay;
+    public float teleportMeter = 10f;
+    [SerializeField]
+    private float _refillRate = 0.01f;
+    [SerializeField]
+    private TMP_Text _meterText;
 
     public UnityEvent onPlayerGameOver;
-
     PlayerController player;
 
     private void Start()
     {
         Instance = this;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+    }
+
+    private void FixedUpdate()
+    {
+        if (teleportMeter < 10)
+        {
+            teleportMeter += _refillRate;
+        }
+
+        _meterText.text = "Meter:" + teleportMeter.ToString();
+
+        if (teleportMeter <= 10)
+        {
+            return;
+        }
+
+        teleportMeter = 10;
     }
 
     public void RestartGame() 

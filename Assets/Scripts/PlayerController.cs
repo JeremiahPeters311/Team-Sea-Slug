@@ -36,11 +36,13 @@ public class PlayerController : MonoBehaviour
     GameObject _newspaperBulletPrefab;
 
     [SerializeField] private GameObject _playerReticle;
+    [SerializeField] private GameObject _managerObject;
     private PlayerControls _playerControls;
+    private GameManager _gameManager;
     [SerializeField] private float _reticleSpeed = 0.3f;
     private Vector3 _reticlePosition;
     [SerializeField] private bool _placingReticle = false;
-    private TeleportCollision teleportCollision;
+    private TeleportCollision _teleportCollision;
     private bool _moveUp = false;
     private bool _moveDown = false;
     private bool _moveLeft = false;
@@ -51,7 +53,8 @@ public class PlayerController : MonoBehaviour
         _playerReticle.SetActive(false);
         _playerControls = new PlayerControls();
         _reticlePosition = _playerReticle.transform.position;
-        teleportCollision = _playerReticle.GetComponent<TeleportCollision>();
+        _teleportCollision = _playerReticle.GetComponent<TeleportCollision>();
+        _gameManager = _managerObject.GetComponent<GameManager>();
     }
 
     private void Start()
@@ -83,7 +86,7 @@ public class PlayerController : MonoBehaviour
 
     private void TeleportReticleInput(InputAction.CallbackContext obj)
     {
-        if (!_placingReticle)
+        if (!_placingReticle && _gameManager.teleportMeter >= 2f)
         {
             _playerReticle.SetActive(true);
             _placingReticle = true;
@@ -99,10 +102,11 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (teleportCollision.canTeleport)
+            if (_teleportCollision.canTeleport && _gameManager.teleportMeter >= 2f)
             {
                 transform.position = _reticlePosition;
                 _placingReticle = false;
+                _gameManager.teleportMeter -= 2f;
                 _playerReticle.SetActive(false);
             }
         }
