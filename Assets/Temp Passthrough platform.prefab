@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3267041933877708891}
   - component: {fileID: 3267653154055067347}
   - component: {fileID: 5511588292270890323}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Temp Passthrough platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,6 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04d035afb76f5524d9bef37f8c23a8b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colliderDisableSeconds: 1.8
+  platformCollider: {fileID: 0}
+  playerInitiatedPassthrough: 0
 --- !u!61 &3267653154055067347
 BoxCollider2D:
   m_ObjectHideFlags: 0
