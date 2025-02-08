@@ -15,10 +15,6 @@ public class PlayerManager : MonoBehaviour
     [Tooltip("Period of time to wait after the player gets hit to play an animation, before sending them to the start of the level or triggering the game over screen")]
     float _playerHitWaitDelay;
 
-    [SerializeField]
-    GameObject _newspaperBulletPrefab;
-
-    public UnityEvent onPlayerGameOver;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -38,7 +34,7 @@ public class PlayerManager : MonoBehaviour
         yield return new WaitForSeconds(_playerHitWaitDelay);
         if (_lives == 0)
         {
-            onPlayerGameOver.Invoke();
+            
         }
         else
         {
