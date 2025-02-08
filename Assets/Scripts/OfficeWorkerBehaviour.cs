@@ -11,10 +11,6 @@ public class OfficeWorkerBehaviour : MonoBehaviour
     [SerializeField] private GameObject PlayerRef;
 
     private bool IsAttacking = false;
-    void Start()
-    {
-        
-    }
 
     private void Update()
     {

@@ -32,6 +32,4 @@ public class BirdBehaviour : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-
 }
