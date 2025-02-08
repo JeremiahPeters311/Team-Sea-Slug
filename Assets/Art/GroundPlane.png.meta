@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cb4a9deb3d850704f99f21f70c5a65c2
+guid: 12ebce9be3024764587727fcbd2ffc47
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IntroWindow_0
+      name: GroundPlane_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 63
-        height: 28
+        width: 256
+        height: 224
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8bbec12d840a5a4eb9bc416dfd9f60c
-      internalID: 95861077
+      spriteID: f1d4edc18e989ee4d83ed8b7eacaf82e
+      internalID: 1507720868
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IntroWindow_1
+      name: GroundPlane_1
       rect:
         serializedVersion: 2
-        x: 63
+        x: 256
         y: 0
-        width: 63
-        height: 28
+        width: 256
+        height: 224
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9af42e853aa1134ebda29ae03187429
-      internalID: -100556209
+      spriteID: e61c46b94a27e794494704c50f4af3dc
+      internalID: -1591917450
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IntroWindow_2
+      name: GroundPlane_2
       rect:
         serializedVersion: 2
-        x: 126
+        x: 512
         y: 0
-        width: 63
-        height: 28
+        width: 256
+        height: 224
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b4ff2bac95efd04a89b0c554733183b
-      internalID: -888049355
+      spriteID: 271b497611f218447ac04a8cb4d42e0d
+      internalID: -1887007085
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IntroWindow_3
+      name: GroundPlane_3
       rect:
         serializedVersion: 2
-        x: 189
+        x: 768
         y: 0
-        width: 63
-        height: 28
+        width: 256
+        height: 224
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,20 +174,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bbde1ab1cdc885742b0098acb29c8724
-      internalID: 747800282
+      spriteID: e80740b7da40dc14f83822e89141511f
+      internalID: -871926391
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IntroWindow_4
+      name: GroundPlane_4
       rect:
         serializedVersion: 2
-        x: 252
+        x: 1024
         y: 0
-        width: 63
-        height: 28
+        width: 256
+        height: 224
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,8 +195,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 59b65555f6647924696678a0ceca458f
-      internalID: -1509602852
+      spriteID: e5709fd4f765ddb4ea81700e3bea47f4
+      internalID: -865635588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GroundPlane_5
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 0
+        width: 256
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8845f046f8cab9409a5497bb23e3899
+      internalID: 230399258
       vertices: []
       indices: 
       edges: []
@@ -212,11 +233,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      IntroWindow_0: 95861077
-      IntroWindow_1: -100556209
-      IntroWindow_2: -888049355
-      IntroWindow_3: 747800282
-      IntroWindow_4: -1509602852
+      GroundPlane_0: 1507720868
+      GroundPlane_1: -1591917450
+      GroundPlane_2: -1887007085
+      GroundPlane_3: -871926391
+      GroundPlane_4: -865635588
+      GroundPlane_5: 230399258
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cb4a9deb3d850704f99f21f70c5a65c2
+guid: 961ecc2b077c3b04da948524d337ecb8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IntroWindow_0
+      name: Jerry_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 63
-        height: 28
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8bbec12d840a5a4eb9bc416dfd9f60c
-      internalID: 95861077
+      spriteID: e2da3abab3c7f7b49a26525828d6048f
+      internalID: -1975976286
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IntroWindow_1
+      name: Jerry_1
       rect:
         serializedVersion: 2
-        x: 63
+        x: 40
         y: 0
-        width: 63
-        height: 28
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9af42e853aa1134ebda29ae03187429
-      internalID: -100556209
+      spriteID: 9182a2f344920e44db9a3c8a446d9969
+      internalID: 1663124660
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IntroWindow_2
+      name: Jerry_2
       rect:
         serializedVersion: 2
-        x: 126
+        x: 80
         y: 0
-        width: 63
-        height: 28
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b4ff2bac95efd04a89b0c554733183b
-      internalID: -888049355
+      spriteID: 306b41ae3db9e8a4bb862fd05a2272c8
+      internalID: 1309966838
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IntroWindow_3
+      name: Jerry_3
       rect:
         serializedVersion: 2
-        x: 189
+        x: 120
         y: 0
-        width: 63
-        height: 28
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,20 +174,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bbde1ab1cdc885742b0098acb29c8724
-      internalID: 747800282
+      spriteID: 27504fbe14c34024997285908195e029
+      internalID: -480672762
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IntroWindow_4
+      name: Jerry_4
       rect:
         serializedVersion: 2
-        x: 252
+        x: 160
         y: 0
-        width: 63
-        height: 28
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,8 +195,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 59b65555f6647924696678a0ceca458f
-      internalID: -1509602852
+      spriteID: 5ef25bab66905d742af27b0b880d9e7a
+      internalID: -2030193555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jerry_5
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5966639e369a22840952726f32f9e6b7
+      internalID: 821678001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jerry_6
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 654dbbf59a2fb8b438234f46ef1ac5e3
+      internalID: 1098911510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jerry_7
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 0
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14dbcc24b178d3047ae71dddec2221da
+      internalID: 940228715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jerry_8
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a83f352aeaac5ab41a5a12fb7973dc45
+      internalID: 472398702
       vertices: []
       indices: 
       edges: []
@@ -212,11 +296,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      IntroWindow_0: 95861077
-      IntroWindow_1: -100556209
-      IntroWindow_2: -888049355
-      IntroWindow_3: 747800282
-      IntroWindow_4: -1509602852
+      Jerry_0: -1975976286
+      Jerry_1: 1663124660
+      Jerry_2: 1309966838
+      Jerry_3: -480672762
+      Jerry_4: -2030193555
+      Jerry_5: 821678001
+      Jerry_6: 1098911510
+      Jerry_7: 940228715
+      Jerry_8: 472398702
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
