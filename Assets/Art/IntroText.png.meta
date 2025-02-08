@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cb4a9deb3d850704f99f21f70c5a65c2
+guid: d882c110f53362d429ccd46e4cff77bb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IntroWindow_0
+      name: IntroText_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 63
-        height: 28
+        width: 256
+        height: 224
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8bbec12d840a5a4eb9bc416dfd9f60c
-      internalID: 95861077
+      spriteID: fd62e8cb26d7dfe4383d9b1fea36be4f
+      internalID: 1772263240
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IntroWindow_1
+      name: IntroText_1
       rect:
         serializedVersion: 2
-        x: 63
+        x: 256
         y: 0
-        width: 63
-        height: 28
+        width: 256
+        height: 224
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9af42e853aa1134ebda29ae03187429
-      internalID: -100556209
+      spriteID: ddb5344f57d97a840b6448e3440b0c85
+      internalID: 861042616
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IntroWindow_2
+      name: IntroText_2
       rect:
         serializedVersion: 2
-        x: 126
+        x: 512
         y: 0
-        width: 63
-        height: 28
+        width: 256
+        height: 224
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,50 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b4ff2bac95efd04a89b0c554733183b
-      internalID: -888049355
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IntroWindow_3
-      rect:
-        serializedVersion: 2
-        x: 189
-        y: 0
-        width: 63
-        height: 28
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bbde1ab1cdc885742b0098acb29c8724
-      internalID: 747800282
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IntroWindow_4
-      rect:
-        serializedVersion: 2
-        x: 252
-        y: 0
-        width: 63
-        height: 28
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 59b65555f6647924696678a0ceca458f
-      internalID: -1509602852
+      spriteID: 2f0460c4cd594f24887ee4b7c52d8129
+      internalID: -720572094
       vertices: []
       indices: 
       edges: []
@@ -212,11 +170,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      IntroWindow_0: 95861077
-      IntroWindow_1: -100556209
-      IntroWindow_2: -888049355
-      IntroWindow_3: 747800282
-      IntroWindow_4: -1509602852
+      IntroText_0: 1772263240
+      IntroText_1: 861042616
+      IntroText_2: -720572094
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
