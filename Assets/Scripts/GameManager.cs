@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour
     public void PlayerDamage() 
     {
         _lives--;
+        player.playerAnimator.SetBool("Damage", true);
         StartCoroutine(PlayerHitDelay());
     }
 
@@ -81,10 +82,13 @@ public class GameManager : MonoBehaviour
 
         if (_lives <= 0)
         {
+            player.playerAnimator.SetBool("Damage", false);
+            player.playerAnimator.SetBool("Die", true);
             onPlayerGameOver.Invoke();
         }
         else 
         {
+            player.playerAnimator.SetBool("Damage", false);
             player.transform.position = _gameBeginningTransform.position;
             player.EnableControls();
         }

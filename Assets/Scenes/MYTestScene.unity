@@ -1065,6 +1065,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1181187835406146056, guid: 0e232942e6dbde04aade6c4406228a17, type: 3}
+      propertyPath: _jumpHeight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1181187835406146056, guid: 0e232942e6dbde04aade6c4406228a17, type: 3}
       propertyPath: _managerObject
       value: 
       objectReference: {fileID: 875498370}

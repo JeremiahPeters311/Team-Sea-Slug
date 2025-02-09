@@ -47,6 +47,11 @@ public class PlayerController : MonoBehaviour
     private bool _moveLeft = false;
     private bool _moveRight = false;
 
+    private bool _lookingUp = false;
+    private bool _lookingDown = false;
+
+    public Animator playerAnimator;
+
     [SerializeField] private float _maxTeleportDistance = 10f;
     
     //How far back the player can move. Position will update as player moves forward.
@@ -71,6 +76,7 @@ public class PlayerController : MonoBehaviour
         _playerMaxBackPos.x -= _maxBackRange;
         _teleportCollision = _playerReticle.GetComponent<TeleportCollision>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        playerAnimator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -82,6 +88,10 @@ public class PlayerController : MonoBehaviour
     {
         _playerControls.Enable();
         _playerControls.TeleportMap.Teleport.performed += TeleportReticleInput;
+        _playerControls.TeleportMap.Up.performed += LookUp;
+        _playerControls.TeleportMap.Down.performed += LookDown;
+        _playerControls.TeleportMap.Up.canceled += LookUpCancel;
+        _playerControls.TeleportMap.Down.canceled += LookDownCancel;
     }
 
     private void OnDisable()
@@ -96,6 +106,11 @@ public class PlayerController : MonoBehaviour
         _playerControls.TeleportMap.Down.canceled -= ReticleDownCancel;
         _playerControls.TeleportMap.Left.canceled -= ReticleLeftCancel;
         _playerControls.TeleportMap.Right.canceled -= ReticleRightCancel;
+
+        _playerControls.TeleportMap.Up.performed -= LookUp;
+        _playerControls.TeleportMap.Down.performed -= LookDown;
+        _playerControls.TeleportMap.Up.canceled -= LookUpCancel;
+        _playerControls.TeleportMap.Down.canceled -= LookDownCancel;
         _playerReticle.SetActive(false);
         _playerControls.Disable();
     }
@@ -106,6 +121,10 @@ public class PlayerController : MonoBehaviour
         {
             _playerReticle.SetActive(true);
             _placingReticle = true;
+            playerAnimator.SetBool("TeleportPre", true);
+            playerAnimator.SetBool("Walking", false);
+            playerAnimator.SetBool("WalkingLookUp", false);
+            playerAnimator.SetBool("WalkingLookDown", false);
             _playerControls.TeleportMap.Up.performed += ReticleUp;
             _playerControls.TeleportMap.Down.performed += ReticleDown;
             _playerControls.TeleportMap.Left.performed += ReticleLeft;
@@ -122,7 +141,10 @@ public class PlayerController : MonoBehaviour
             {
                 transform.position = _reticlePosition;
                 _teleported = true;
+                playerAnimator.SetBool("TeleportPre", false);
+                playerAnimator.SetBool("TeleportPost", true);
                 StartCoroutine(TeleportCooldown());
+                StartCoroutine(TeleportAnimation());
                 _playerReticle.SetActive(false);
             }
         }
@@ -161,11 +183,37 @@ public class PlayerController : MonoBehaviour
         _moveRight = false;
     }
 
+    private void LookUp(InputAction.CallbackContext obj)
+    {
+        _lookingUp = true;
+    }
+
+    private void LookDown(InputAction.CallbackContext obj)
+    {
+        _lookingDown = true;
+    }
+
+    private void LookUpCancel(InputAction.CallbackContext obj)
+    {
+        _lookingUp = false;
+    }
+
+    private void LookDownCancel(InputAction.CallbackContext obj)
+    {
+        _lookingDown = false;
+    }
+
     private IEnumerator TeleportCooldown()
     {
         _placingReticle = false;
         yield return new WaitForSeconds(_cooldownTime);
         _teleported = false;
+    }
+
+    private IEnumerator TeleportAnimation()
+    {
+        yield return new WaitForSeconds(0.2f);
+        playerAnimator.SetBool("TeleportPost", false);
     }
 
     private void FixedUpdate()
@@ -190,6 +238,24 @@ public class PlayerController : MonoBehaviour
                 _updatePlayerPos = transform.position;
                 _updatePlayerPos.x = _playerMaxBackPos.x;
                 transform.position = _updatePlayerPos;
+            }
+
+            if (_lookingUp)
+            {
+                playerAnimator.SetBool("LookUp", true);
+            }
+            else
+            {
+                playerAnimator.SetBool("LookUp", false);
+            }
+
+            if (_lookingDown)
+            {
+                playerAnimator.SetBool("LookDown", true);
+            }
+            else
+            {
+                playerAnimator.SetBool("LookDown", false);
             }
         }
         else
@@ -250,19 +316,60 @@ public class PlayerController : MonoBehaviour
         {
             _spriteRenderer.flipX = false;
         }
+
+        if (!_placingReticle)
+        {
+            if (!_lookingDown && !_lookingUp || _lookingDown && _lookingUp)
+            {
+                if (context.started)
+                {
+                    playerAnimator.SetBool("Walking", true);
+                }
+                else if (context.canceled)
+                {
+                    playerAnimator.SetBool("Walking", false);
+                }
+            }
+            if (!_lookingDown && _lookingUp)
+            {
+                if (context.started)
+                {
+                    playerAnimator.SetBool("WalkingLookUp", true);
+                }
+                else if (context.canceled)
+                {
+                    playerAnimator.SetBool("WalkingLookUp", false);
+                }
+            }
+            if (_lookingDown && !_lookingUp)
+            {
+                if (context.started)
+                {
+                    playerAnimator.SetBool("WalkingLookDown", true);
+                }
+                else if (context.canceled)
+                {
+                    playerAnimator.SetBool("WalkingLookDown", false);
+                }
+            }
+        }
     }
 
     public void OnPlayerJump(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (!_placingReticle)
         {
-            JumpAction();
+            if (context.started)
+            {
+                JumpAction();
+                playerAnimator.SetBool("Jump", true);
+            }
+            else if (context.canceled)
+            {
+                _smoothMovementVelocity.y = 0;
+                playerAnimator.SetBool("Jump", false);
+            }
         }
-        else if (context.canceled)
-        {
-            _smoothMovementVelocity.y = 0;
-        }
-
     }
 
     public void OnPlayerFire(InputAction.CallbackContext context) 
