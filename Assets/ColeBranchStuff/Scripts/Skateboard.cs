@@ -33,4 +33,12 @@ public class Skateboard : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name.Contains("Player"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }
