@@ -4069,6 +4069,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 752696317}
     m_Modifications:
+    - target: {fileID: 274183027606662012, guid: 98afc83368c888d4da680190c8beb32e, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 651061614270718669, guid: 98afc83368c888d4da680190c8beb32e, type: 3}
       propertyPath: m_Name
       value: ConstructionWindows_0 (8)
@@ -4814,6 +4818,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 752696317}
     m_Modifications:
+    - target: {fileID: 274183027606662012, guid: 98afc83368c888d4da680190c8beb32e, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 651061614270718669, guid: 98afc83368c888d4da680190c8beb32e, type: 3}
       propertyPath: m_Name
       value: ConstructionWindows_0 (5)
@@ -4942,6 +4950,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 752696317}
     m_Modifications:
+    - target: {fileID: 274183027606662012, guid: 98afc83368c888d4da680190c8beb32e, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 651061614270718669, guid: 98afc83368c888d4da680190c8beb32e, type: 3}
       propertyPath: m_Name
       value: ConstructionWindows_0 (7)
@@ -5697,6 +5709,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 752696317}
     m_Modifications:
+    - target: {fileID: 274183027606662012, guid: 98afc83368c888d4da680190c8beb32e, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 651061614270718669, guid: 98afc83368c888d4da680190c8beb32e, type: 3}
       propertyPath: m_Name
       value: ConstructionWindows_0
@@ -6562,6 +6578,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 752696317}
     m_Modifications:
+    - target: {fileID: 274183027606662012, guid: 98afc83368c888d4da680190c8beb32e, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 651061614270718669, guid: 98afc83368c888d4da680190c8beb32e, type: 3}
       propertyPath: m_Name
       value: ConstructionWindows_0 (9)
@@ -8800,6 +8820,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 752696317}
     m_Modifications:
+    - target: {fileID: 274183027606662012, guid: 98afc83368c888d4da680190c8beb32e, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 651061614270718669, guid: 98afc83368c888d4da680190c8beb32e, type: 3}
       propertyPath: m_Name
       value: ConstructionWindows_0 (2)
@@ -9072,6 +9096,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 752696317}
     m_Modifications:
+    - target: {fileID: 274183027606662012, guid: 98afc83368c888d4da680190c8beb32e, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 651061614270718669, guid: 98afc83368c888d4da680190c8beb32e, type: 3}
       propertyPath: m_Name
       value: ConstructionWindows_0 (4)
@@ -14682,6 +14710,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 752696317}
     m_Modifications:
+    - target: {fileID: 274183027606662012, guid: 98afc83368c888d4da680190c8beb32e, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 651061614270718669, guid: 98afc83368c888d4da680190c8beb32e, type: 3}
       propertyPath: m_Name
       value: ConstructionWindows_0 (6)
@@ -15900,6 +15932,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 752696317}
     m_Modifications:
+    - target: {fileID: 274183027606662012, guid: 98afc83368c888d4da680190c8beb32e, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 651061614270718669, guid: 98afc83368c888d4da680190c8beb32e, type: 3}
       propertyPath: m_Name
       value: ConstructionWindows_0 (3)
@@ -17609,6 +17645,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 752696317}
     m_Modifications:
+    - target: {fileID: 274183027606662012, guid: 98afc83368c888d4da680190c8beb32e, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 651061614270718669, guid: 98afc83368c888d4da680190c8beb32e, type: 3}
       propertyPath: m_Name
       value: ConstructionWindows_0 (1)
