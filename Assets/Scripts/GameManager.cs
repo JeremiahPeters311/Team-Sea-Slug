@@ -29,6 +29,26 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private TMP_Text _meterText;
 
+    [SerializeField]
+    private Camera _mainCam;
+    [SerializeField]
+    private GameObject _player;
+    [SerializeField]
+    private float _checkAdjust = 10f;
+    [SerializeField]
+    private GameObject _levelChecker;
+    private RoomCheckerCollision _levelCheckerScript;
+
+    [SerializeField]
+    private float _defaultStartPos = -7f;
+    [SerializeField]
+    private float _startAreaCameraOffset = 5f;
+    [SerializeField]
+    private float _levelCheckPosOffset = 5f;
+
+    private Vector2 _playerPos;
+    private Vector3 _camPos;
+
     public UnityEvent onPlayerGameOver;
     PlayerController player;
 
@@ -36,28 +56,42 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        _levelCheckerScript = _levelChecker.GetComponent<RoomCheckerCollision>();
+        player.startAreaPos.x = _defaultStartPos;
+    }
+
+    private void Awake()
+    {
+        _playerPos = _player.transform.position;
+        _camPos = _mainCam.transform.position;
     }
 
     private void FixedUpdate()
     {
-        UpdateTeleportMeter();
-    }
-
-    private void UpdateTeleportMeter() 
-    {
-        if (teleportMeter < 10)
+        if (!_levelCheckerScript.atEndOfArea)
         {
-            teleportMeter += _refillRate;
+            _playerPos = _player.transform.position;
+
+            if (_player.transform.position.x >= player.startAreaPos.x + _startAreaCameraOffset && player.playerMovingForward) 
+            {
+                _camPos.x = _playerPos.x;
+                _mainCam.transform.position = _camPos; 
+            }
+
+            _playerPos.x += _levelCheckPosOffset;
+            _levelChecker.transform.position = _playerPos;
         }
 
-        _meterText.text = "Meter:" + teleportMeter.ToString();
-
-        if (teleportMeter <= 10)
+        if (!player.nextRoom)
         {
             return;
         }
 
-        teleportMeter = 10;
+        _camPos.x = player.startAreaPos.x + 5f;
+        _playerPos.x = player.startAreaPos.x + 2f;
+        _mainCam.transform.position = _camPos;
+        player.transform.position = _playerPos;
+        _levelCheckerScript.atEndOfArea = false;
     }
 
     public void RestartGame() 
