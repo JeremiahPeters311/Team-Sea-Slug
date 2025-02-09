@@ -26,7 +26,7 @@ public class TitleScreenScrolling : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey("space"))
+        if (Input.GetKeyDown("space"))
         {
             if (_screenScrollSpeed == 0)
             {
@@ -43,6 +43,7 @@ public class TitleScreenScrolling : MonoBehaviour
         FiredAnim.SetBool("bro is fired", true);
         yield return new WaitForSeconds(1.5f);
         Anim.SetBool("Game Started", true);
+        yield return new WaitForSeconds(0.5f);
         JerryAnim.SetBool("Jerry Jumpscare", true);
         yield return new WaitForSeconds(1);
         StartCoroutine(ScrollingScreen(_movingDestination.position, _screenScrollSpeed));
