@@ -71,11 +71,21 @@ public class PlayerController : MonoBehaviour
         _playerMaxBackPos.x -= _maxBackRange;
         _teleportCollision = _playerReticle.GetComponent<TeleportCollision>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        _playerControls.PlayerActionMap.Disable();
     }
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    public IEnumerator ControlsDuringTitleScreen()
+    {
+        airHorizontalMoveSpeed = 4.5f;
+        groundHorizontalMoveSpeed = 4.5f;
+
+        yield return null;
     }
 
     private void OnEnable()
@@ -271,7 +281,6 @@ public class PlayerController : MonoBehaviour
         {
             var bulletSent = Instantiate(_newspaperBulletPrefab, transform.position, Quaternion.identity).GetComponent<PlayerBullet>();
             bulletSent.SetDirection(new Vector2(horizontalVelocity, verticalDirection), _spriteRenderer.flipX);
-
         }
     }
 

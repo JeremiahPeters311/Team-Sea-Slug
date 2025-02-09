@@ -22,6 +22,8 @@ public class TitleScreenScrolling : MonoBehaviour
 
     [SerializeField] private GameObject RealPlayer;
 
+    [SerializeField] private GameObject MainCamera;
+
     private bool _hasScrollingStarted = false;
 
     private PlayerControls _playerControls;
@@ -41,10 +43,12 @@ public class TitleScreenScrolling : MonoBehaviour
         JerryAnim.SetBool("Jerry Jumpscare", true);
         yield return new WaitForSeconds(1);
         StartCoroutine(ScrollingScreen(_movingDestination.position, _screenScrollSpeed));
-        yield return new WaitForSeconds(2);
-
-        Instantiate(RealPlayer, new Vector3(-6f, -0.5f, 0f), Quaternion.identity);
         Destroy(IntroPlayer);
+        yield return new WaitForSeconds(3f);
+
+        StartCoroutine(RealPlayer.GetComponent<PlayerController>().ControlsDuringTitleScreen());
+
+        Destroy(gameObject);
     }
 
     private IEnumerator ScrollingScreen(Vector3 destination, float scrollSpeed)
