@@ -74,6 +74,10 @@ public class PlayerController : MonoBehaviour
     private bool isInvulnerable = false;
     [SerializeField]
     private float invulnerabilitySeconds = 2;
+    [SerializeField]
+    private float _defaultTime = 1f;
+    [SerializeField]
+    private float _slowedTime = 0.2f;
 
     private void Awake()
     {
@@ -89,6 +93,7 @@ public class PlayerController : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         playerAnimator = GetComponent<Animator>();
         _playerControls.PlayerActionMap.Disable();
+        Time.timeScale = _defaultTime;
     }
 
     private void Start()
@@ -147,6 +152,7 @@ public class PlayerController : MonoBehaviour
             _playerControls.TeleportMap.Down.canceled += ReticleDownCancel;
             _playerControls.TeleportMap.Left.canceled += ReticleLeftCancel;
             _playerControls.TeleportMap.Right.canceled += ReticleRightCancel;
+            Time.timeScale = _slowedTime;
         }
         else
         {
@@ -160,6 +166,7 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(TeleportAnimation());
                 _playerReticle.SetActive(false);
                 _teleportRange.SetActive(false);
+                Time.timeScale = _defaultTime;
             }
         }
     }
