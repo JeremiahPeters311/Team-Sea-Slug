@@ -25,11 +25,5 @@ public class BirdBehaviour : MonoBehaviour
             var step = BirdSpeed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, PlayerRef.transform.position, BirdSpeed * step);
         }
-
-        //don't go too far offscreen
-        if (transform.position.x <= -12)
-        {
-            Destroy(gameObject);
-        }
     }
 }

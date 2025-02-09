@@ -22,20 +22,16 @@ public class TitleScreenScrolling : MonoBehaviour
 
     [SerializeField] private GameObject RealPlayer;
 
+    [SerializeField] private GameObject MainCamera;
+
     private bool _hasScrollingStarted = false;
 
-    private void Update()
+    private PlayerControls _playerControls;
+
+    private void Awake()
     {
-        if (Input.GetKeyDown("space"))
-        {
-            if (_screenScrollSpeed == 0)
-            {
-                Debug.LogWarning("scroll speed is set to zero, now it won't scroll, please fix that, thanks");
-            }
-            
-            StartCoroutine(IntroTiming());
-            //StartCoroutine(ScrollingScreen(_movingDestination.position, _screenScrollSpeed));
-        }
+        _playerControls = new PlayerControls();
+        _playerControls.PlayerActionMap.StartGame.performed += ctx => StartCoroutine(IntroTiming());
     }
 
     private IEnumerator IntroTiming()
@@ -47,14 +43,21 @@ public class TitleScreenScrolling : MonoBehaviour
         JerryAnim.SetBool("Jerry Jumpscare", true);
         yield return new WaitForSeconds(1);
         StartCoroutine(ScrollingScreen(_movingDestination.position, _screenScrollSpeed));
-        yield return new WaitForSeconds(2);
-
-        Instantiate(RealPlayer, new Vector3(-6f, -0.5f, 0f), Quaternion.identity);
         Destroy(IntroPlayer);
+        yield return new WaitForSeconds(3f);
+
+        StartCoroutine(RealPlayer.GetComponent<PlayerController>().ControlsDuringTitleScreen());
+
+        Destroy(gameObject);
     }
 
     private IEnumerator ScrollingScreen(Vector3 destination, float scrollSpeed)
     {
+        if (_screenScrollSpeed == 0)
+        {
+            Debug.LogWarning("scroll speed is set to zero, now it won't scroll, please fix that, thanks");
+        }
+
         if (!_hasScrollingStarted)
         {
             _hasScrollingStarted = true;
@@ -73,5 +76,15 @@ public class TitleScreenScrolling : MonoBehaviour
                 yield return null;
             }
         }
+    }
+
+    private void OnEnable()
+    {
+        _playerControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _playerControls.Disable();
     }
 }

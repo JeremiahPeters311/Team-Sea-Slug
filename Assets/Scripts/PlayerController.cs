@@ -40,26 +40,52 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _reticleSpeed = 0.3f;
     private Vector3 _reticlePosition;
     [SerializeField] private bool _placingReticle = false;
+    private bool _teleported = false;
     private TeleportCollision _teleportCollision;
     private bool _moveUp = false;
     private bool _moveDown = false;
     private bool _moveLeft = false;
     private bool _moveRight = false;
 
+    [SerializeField] private float _maxTeleportDistance = 10f;
+    
+    //How far back the player can move. Position will update as player moves forward.
+    private Vector2 _playerMaxBackPos;
+    private Vector2 _currentCenter;
+    private Vector2 _updatePlayerPos;
+    [SerializeField]
+    private float _maxBackRange = 7f;
+    public bool playerMovingForward = true;
+
+    [SerializeField] private float _cooldownTime = 1f;
     SpriteRenderer _spriteRenderer;
+
 
     private void Awake()
     {
         _playerReticle.SetActive(false);
         _playerControls = new PlayerControls();
         _reticlePosition = _playerReticle.transform.position;
+        _playerMaxBackPos = transform.position;
+        _currentCenter = transform.position;
+        _playerMaxBackPos.x -= _maxBackRange;
         _teleportCollision = _playerReticle.GetComponent<TeleportCollision>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        _playerControls.PlayerActionMap.Disable();
     }
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    public IEnumerator ControlsDuringTitleScreen()
+    {
+        airHorizontalMoveSpeed = 4.5f;
+        groundHorizontalMoveSpeed = 4.5f;
+
+        yield return null;
     }
 
     private void OnEnable()
@@ -86,7 +112,7 @@ public class PlayerController : MonoBehaviour
 
     private void TeleportReticleInput(InputAction.CallbackContext obj)
     {
-        if (!_placingReticle && GameManager.Instance.teleportMeter >= 2f)
+        if (!_placingReticle && !_teleported)
         {
             _playerReticle.SetActive(true);
             _placingReticle = true;
@@ -102,11 +128,11 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (_teleportCollision.canTeleport && GameManager.Instance.teleportMeter >= 2f)
+            if (_teleportCollision.canTeleport && !_teleported)
             {
                 transform.position = _reticlePosition;
-                _placingReticle = false;
-                GameManager.Instance.teleportMeter -= 2f;
+                _teleported = true;
+                StartCoroutine(TeleportCooldown());
                 _playerReticle.SetActive(false);
             }
         }
@@ -145,11 +171,36 @@ public class PlayerController : MonoBehaviour
         _moveRight = false;
     }
 
+    private IEnumerator TeleportCooldown()
+    {
+        _placingReticle = false;
+        yield return new WaitForSeconds(_cooldownTime);
+        _teleported = false;
+    }
+
     private void FixedUpdate()
     {
         if (!_placingReticle)
         {
             MovePlayer();
+
+            if (transform.position.x >= _currentCenter.x)
+            {
+                _currentCenter = transform.position;
+                _playerMaxBackPos.x = transform.position.x - _maxBackRange;
+                playerMovingForward = true;
+            }
+            else
+            {
+                playerMovingForward = false;
+            }
+
+            if (transform.position.x <= _playerMaxBackPos.x)
+            {
+                _updatePlayerPos = transform.position;
+                _updatePlayerPos.x = _playerMaxBackPos.x;
+                transform.position = _updatePlayerPos;
+            }
         }
         else
         {
@@ -169,6 +220,27 @@ public class PlayerController : MonoBehaviour
             {
                 _reticlePosition.x += _reticleSpeed;
             }
+
+            if (_reticlePosition.y >= transform.position.y + _maxTeleportDistance)
+            {
+                _reticlePosition.y = transform.position.y + _maxTeleportDistance;
+            }
+
+            if (_reticlePosition.y <= transform.position.y - _maxTeleportDistance)
+            {
+                _reticlePosition.y = transform.position.y - _maxTeleportDistance;
+            }
+
+            if (_reticlePosition.x >= transform.position.x + _maxTeleportDistance)
+            {
+                _reticlePosition.x = transform.position.x + _maxTeleportDistance;
+            }
+
+            if (_reticlePosition.x <= transform.position.x - _maxTeleportDistance)
+            {
+                _reticlePosition.x = transform.position.x - _maxTeleportDistance;
+            }
+
             _playerReticle.transform.position = _reticlePosition;
         }
     }
@@ -209,7 +281,6 @@ public class PlayerController : MonoBehaviour
         {
             var bulletSent = Instantiate(_newspaperBulletPrefab, transform.position, Quaternion.identity).GetComponent<PlayerBullet>();
             bulletSent.SetDirection(new Vector2(horizontalVelocity, verticalDirection), _spriteRenderer.flipX);
-
         }
     }
 
@@ -247,7 +318,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Entered: " + collision.gameObject.name);
         if (collision.gameObject.layer == LayerMask.NameToLayer("Platform"))
         {
             platform = collision.gameObject.GetComponent<PassthroughPlatform>();
