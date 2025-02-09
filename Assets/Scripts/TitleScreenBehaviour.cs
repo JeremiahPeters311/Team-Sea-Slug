@@ -24,18 +24,12 @@ public class TitleScreenScrolling : MonoBehaviour
 
     private bool _hasScrollingStarted = false;
 
-    private void Update()
+    private PlayerControls _playerControls;
+
+    private void Awake()
     {
-        if (Input.GetKeyDown("space"))
-        {
-            if (_screenScrollSpeed == 0)
-            {
-                Debug.LogWarning("scroll speed is set to zero, now it won't scroll, please fix that, thanks");
-            }
-            
-            StartCoroutine(IntroTiming());
-            //StartCoroutine(ScrollingScreen(_movingDestination.position, _screenScrollSpeed));
-        }
+        _playerControls = new PlayerControls();
+        _playerControls.PlayerActionMap.StartGame.performed += ctx => StartCoroutine(IntroTiming());
     }
 
     private IEnumerator IntroTiming()
@@ -55,6 +49,11 @@ public class TitleScreenScrolling : MonoBehaviour
 
     private IEnumerator ScrollingScreen(Vector3 destination, float scrollSpeed)
     {
+        if (_screenScrollSpeed == 0)
+        {
+            Debug.LogWarning("scroll speed is set to zero, now it won't scroll, please fix that, thanks");
+        }
+
         if (!_hasScrollingStarted)
         {
             _hasScrollingStarted = true;
@@ -73,5 +72,15 @@ public class TitleScreenScrolling : MonoBehaviour
                 yield return null;
             }
         }
+    }
+
+    private void OnEnable()
+    {
+        _playerControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _playerControls.Disable();
     }
 }
