@@ -10,12 +10,17 @@ public class Manhole : MonoBehaviour
     [SerializeField] private float waterInterval;
     private float waterTime;
 
+    [SerializeField] private AudioClip waterFlow;
+
     private bool waterCount;
+    private bool visible;
 
     [SerializeField] private float launchForce;
 
     [SerializeField] private GameObject leftDrop;
     [SerializeField] private GameObject rightDrop;
+
+    [SerializeField] private AudioClip manholeDrop;
 
     private Rigidbody2D rb2d;
 
@@ -27,12 +32,17 @@ public class Manhole : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    { 
         spawnTime += Time.deltaTime;
         if (spawnTime > spawnInterval)
         {
-            Launch();
-            spawnTime = 0f;
+            if(visible)
+            {
+                Launch();
+                SFXManager.instance.PlaySoundEffct(waterFlow, transform, 1f);
+                spawnTime = 0f;
+            }
+            
         }
 
         if (waterCount)
@@ -42,6 +52,7 @@ public class Manhole : MonoBehaviour
             {
                 WaterShoot();
                 waterTime = 0f;
+                SFXManager.instance.PlaySoundEffct(manholeDrop, transform, 0.5f);
             }
         }
     }
@@ -72,5 +83,15 @@ public class Manhole : MonoBehaviour
         Instantiate(rightDrop, gameObject.transform.position + offset6, rightDrop.transform.rotation);
 
         waterCount = false;
+    }
+
+    private void OnBecameVisible()
+    {
+        visible = true;
+    }
+
+    private void OnBecameInvisible()
+    {
+        visible = false;
     }
 }
