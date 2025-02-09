@@ -47,6 +47,6 @@ MonoBehaviour:
   _spawnRate: 1
   _maxEnemies: 3
   _spawnOfficeWorkers: 0
-  _officeWorkerPrefab: {fileID: 753863835594353694, guid: b1f9d432e8414ff40a0fd271424748cf, type: 3}
+  _officeWorkerPrefab: {fileID: 5166755618578423108, guid: e7ff387a8346bec4987dec6d46bfd6a6, type: 3}
   existingEnemiesInScene: []
   existingNodesStack: []

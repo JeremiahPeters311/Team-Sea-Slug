@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4545332897397260555}
   - component: {fileID: -2762914808956349227}
   m_Layer: 0
-  m_Name: WindowEnemy
+  m_Name: WindowEnemy 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -334295522, guid: 1bde12a8fb1fc4542a88a4f574f97772, type: 3}
+  m_Sprite: {fileID: -542161578, guid: 026ef401b157ed346ae198de299c7715, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -109,7 +109,7 @@ Animator:
   m_GameObject: {fileID: 51794965358234488}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4b5641d35aabe3b408175f8528cfac5b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 60caf595c5b1e85458e8aa819a462c46, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
