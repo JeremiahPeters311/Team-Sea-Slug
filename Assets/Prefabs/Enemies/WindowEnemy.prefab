@@ -98,7 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9484721b7b1689044add8cb514e289b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnInterval: 5
   objectToDrop: {fileID: 4197393673468823611, guid: 654b7dc7891e2de43928e4d7e96192c4, type: 3}
 --- !u!95 &-2762914808956349227
 Animator:
