@@ -35,14 +35,14 @@ public class SkateboardSpawner : MonoBehaviour
     /// </summary>
     private void SpawnRight()
     {
-        var offset = new Vector3(2f, -1f, 0f);
+        var offset = new Vector3(1f, 0.1f, 0f);
 
         Instantiate(rightSkateboard, gameObject.transform.position + offset, Quaternion.identity);
     }
 
     private void SpawnLeft()
     {
-        var offset = new Vector3(-2f, -1f, 0f);
+        var offset = new Vector3(-1f, 0.1f, 0f);
 
         Instantiate(leftSkateboard, gameObject.transform.position + offset, Quaternion.identity);
     }

@@ -55,9 +55,9 @@ public class Manhole : MonoBehaviour
 
     private void WaterShoot()
     {
-        var offset1 = new Vector3(0f, -1f, 0f);
-        var offset2 = new Vector3(0f, -2.25f, 0f);
-        var offset3 = new Vector3(0f, -3.5f, 0f);
+        var offset1 = new Vector3(0f, -0.2f, 0f);
+        var offset2 = new Vector3(0f, -0.45f, 0f);
+        var offset3 = new Vector3(0f, -0.7f, 0f);
 
         Instantiate(leftDrop, gameObject.transform.position + offset1, leftDrop.transform.rotation);
         Instantiate(leftDrop, gameObject.transform.position + offset2, leftDrop.transform.rotation);

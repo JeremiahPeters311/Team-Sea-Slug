@@ -26,11 +26,10 @@ public class Water : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.tag == "Manhole")
-        {
-            Destroy(gameObject);
-        }
+        if(!collision.gameObject.name.Contains("Water"))
+
+        Destroy(gameObject);
     }
 }
