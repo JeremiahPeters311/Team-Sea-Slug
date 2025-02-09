@@ -24,11 +24,5 @@ public class OfficeWorkerBehaviour : MonoBehaviour
             IsAttacking = true;
             //shoot
         }
-
-        //don't go too far offscreen
-        if (transform.position.x >= 12)
-        {
-            Destroy(gameObject);
-        }
     }
 }
