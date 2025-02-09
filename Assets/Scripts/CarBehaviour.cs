@@ -14,6 +14,8 @@ public class CarBehaviour : MonoBehaviour
 
     [SerializeField] private float CarDuration;
 
+    [SerializeField] private AudioClip carHorn;
+
     [SerializeField]
     private int _currentCar;
     private Animator _carAnimator;
@@ -52,16 +54,19 @@ public class CarBehaviour : MonoBehaviour
         CarObjRef.SetActive(true);
         if (_currentCar == 1)
         {
+            SFXManager.instance.PlaySoundEffct(carHorn, transform, 1f);
             _carAnimator.SetBool("YellowCar", true);
         }
 
         if (_currentCar == 2)
         {
+            SFXManager.instance.PlaySoundEffct(carHorn, transform, 1f);
             _carAnimator.SetBool("RedCar", true);
         }
 
         if (_currentCar == 3)
         {
+            SFXManager.instance.PlaySoundEffct(carHorn, transform, 1f);
             _carAnimator.SetBool("GreenCar", true);
         }
         yield return new WaitForSeconds(CarDuration);
