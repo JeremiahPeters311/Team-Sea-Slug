@@ -40,6 +40,11 @@ public class GameManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        UpdateTeleportMeter();
+    }
+
+    private void UpdateTeleportMeter() 
+    {
         if (teleportMeter < 10)
         {
             teleportMeter += _refillRate;
