@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         _levelCheckerScript = _levelChecker.GetComponent<RoomCheckerCollision>();
-        _levelCheckerScript.startAreaPos.x = _defaultStartPos;
+        player.startAreaPos.x = _defaultStartPos;
     }
 
     private void Awake()
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
         {
             _playerPos = _player.transform.position;
 
-            if (_player.transform.position.x >= _levelCheckerScript.startAreaPos.x + _startAreaCameraOffset) 
+            if (_player.transform.position.x >= player.startAreaPos.x + _startAreaCameraOffset) 
             {
                 _camPos.x = _playerPos.x;
                 _mainCam.transform.position = _camPos; 
@@ -87,8 +87,10 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        _camPos.x = _levelCheckerScript.startAreaPos.x + 10f;
+        _camPos.x = player.startAreaPos.x + 5f;
+        _playerPos.x = player.startAreaPos.x + 2f;
         _mainCam.transform.position = _camPos;
+        player.transform.position = _playerPos;
         _levelCheckerScript.atEndOfArea = false;
     }
 

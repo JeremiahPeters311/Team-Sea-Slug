@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _maxTeleportDistance = 10f;
 
     public bool nextRoom = false;
+    public Vector2 startAreaPos;
 
     private int testCount = 0;
 
@@ -314,6 +315,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("EndAreaMarker"))
         {
+            startAreaPos.x = collision.gameObject.transform.position.x;
             nextRoom = true;
         }
     }
@@ -322,6 +324,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("EndAreaMarker"))
         {
+            startAreaPos.x = collision.gameObject.transform.position.x;
             nextRoom = false;
         }
     }
