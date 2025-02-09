@@ -14,7 +14,13 @@ public class TitleScreenScrolling : MonoBehaviour
 
     [SerializeField] private Animator FiredAnim;
 
+    [SerializeField] private Animator JerryAnim;
+
     [SerializeField] private float AnimationWaitTime;
+
+    [SerializeField] private GameObject IntroPlayer;
+
+    [SerializeField] private GameObject RealPlayer;
 
     private bool _hasScrollingStarted = false;
 
@@ -37,8 +43,13 @@ public class TitleScreenScrolling : MonoBehaviour
         FiredAnim.SetBool("bro is fired", true);
         yield return new WaitForSeconds(1.5f);
         Anim.SetBool("Game Started", true);
+        JerryAnim.SetBool("Jerry Jumpscare", true);
         yield return new WaitForSeconds(1);
         StartCoroutine(ScrollingScreen(_movingDestination.position, _screenScrollSpeed));
+        yield return new WaitForSeconds(2);
+
+        Instantiate(RealPlayer, new Vector3(-6f, -0.5f, 0f), Quaternion.identity);
+        Destroy(IntroPlayer);
     }
 
     private IEnumerator ScrollingScreen(Vector3 destination, float scrollSpeed)
