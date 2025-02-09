@@ -43,7 +43,8 @@ public class BirdBehaviour : MonoBehaviour
                 }
                 Anim.SetBool("isAttack", true);
                 var step = BirdSpeed * Time.deltaTime;
-                transform.position = Vector3.MoveTowards(transform.position, PlayerRef.transform.position, BirdSpeed * step);
+                var trackingposition = new Vector2(PlayerRef.transform.position.x, PlayerRef.transform.position.y);
+                transform.position = Vector3.MoveTowards(transform.position, trackingposition, BirdSpeed * step);
                 StartCoroutine(WaitTimer(2f));
             }
         }
