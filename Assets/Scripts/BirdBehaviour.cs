@@ -18,30 +18,45 @@ public class BirdBehaviour : MonoBehaviour
 
     private bool CanPlaySound = true;
 
+    private bool StartDoingShit;
+
     private void Awake()
     {
         Anim = GetComponent<Animator>();
     }
     private void Update()
     {
-        if (IsAttacking == false)
+        if (StartDoingShit)
         {
-            transform.Translate(Vector3.left * BirdSpeed * Time.deltaTime);
-        }
-
-        if (Vector3.Distance(gameObject.transform.position, PlayerRef.transform.position) < PlayerDetectionRange)
-        {
-            IsAttacking = true;
-            if (CanPlaySound == true)
+            if (IsAttacking == false)
             {
-                StartCoroutine(SoundTimer(2f));
-                SFXManager.instance.PlaySoundEffct(pigeonCall, transform, 1f);
+                transform.Translate(Vector3.left * BirdSpeed * Time.deltaTime);
             }
-            Anim.SetBool("isAttack", true);
-            var step = BirdSpeed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, PlayerRef.transform.position, BirdSpeed * step);
-            StartCoroutine(WaitTimer(2f));
+
+            if (Vector3.Distance(gameObject.transform.position, PlayerRef.transform.position) < PlayerDetectionRange)
+            {
+                IsAttacking = true;
+                if (CanPlaySound == true)
+                {
+                    StartCoroutine(SoundTimer(2f));
+                    SFXManager.instance.PlaySoundEffct(pigeonCall, transform, 1f);
+                }
+                Anim.SetBool("isAttack", true);
+                var step = BirdSpeed * Time.deltaTime;
+                transform.position = Vector3.MoveTowards(transform.position, PlayerRef.transform.position, BirdSpeed * step);
+                StartCoroutine(WaitTimer(2f));
+            }
         }
+    }
+
+    private void OnBecameVisible()
+    {
+        StartDoingShit = true;
+    }
+
+    private void OnBecameInvisible()
+    {
+        StartDoingShit = false;
     }
 
     private IEnumerator WaitTimer(float WaitTime)
