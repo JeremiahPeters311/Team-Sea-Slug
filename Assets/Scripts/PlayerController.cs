@@ -67,7 +67,12 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float _cooldownTime = 1f;
     SpriteRenderer _spriteRenderer;
-
+    [SerializeField]
+    private string[] hurtPlayerCollisionTags;
+    [SerializeField]
+    private bool isInvulnerable = false;
+    [SerializeField]
+    private float invulnerabilitySeconds = 2;
 
     private void Awake()
     {
@@ -418,11 +423,28 @@ public class PlayerController : MonoBehaviour
             platform = collision.gameObject.GetComponent<PassthroughPlatform>();
             platform.EnterPlatform();
         }
-        if (collision.gameObject.CompareTag("Projectile")) 
+        if (CheckEnemyTagMatch(collision.gameObject)) 
         {
-            _playerControls.Disable();
+            if (isInvulnerable) 
+            {
+                return;
+            }
+            isInvulnerable = true;
+            groundHorizontalMoveSpeed = 0;
             GameManager.Instance.PlayerDamage();
         }
+    }
+
+    private bool CheckEnemyTagMatch(GameObject collidedObject) 
+    {
+        foreach (string tag in hurtPlayerCollisionTags) 
+        {
+            if (collidedObject.CompareTag(tag)) 
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -438,9 +460,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void EnableControls() 
+    public IEnumerator EnableControls() 
     {
-        _playerControls.Disable();
+        groundHorizontalMoveSpeed = 4.5f;
+        float waitInterval = invulnerabilitySeconds / 60;
+        
+        for (int i = 0; i < 60; i++) 
+        {
+            _spriteRenderer.color = new Color(1, 1, 1, _spriteRenderer.color.a == 1 ? 0.15f : 1f);
+            yield return new WaitForSeconds(waitInterval);
+        }
+        _spriteRenderer.color = new Color(1, 1, 1, 1f);
+        isInvulnerable = false;
     }
 }
 

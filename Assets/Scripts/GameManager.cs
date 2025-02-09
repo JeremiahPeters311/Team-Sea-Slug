@@ -66,6 +66,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void QuitGame() 
+    {
+        Application.Quit();
+    }
+
     public void PlayerDamage() 
     {
         _lives--;
@@ -89,7 +94,7 @@ public class GameManager : MonoBehaviour
         {
             player.playerAnimator.SetBool("Damage", false);
             player.transform.position = _gameBeginningTransform.position;
-            player.EnableControls();
+            StartCoroutine(player.EnableControls());
         }
     }
 }
