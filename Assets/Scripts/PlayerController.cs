@@ -97,10 +97,6 @@ public class PlayerController : MonoBehaviour
     {
         _playerControls.Enable();
         _playerControls.TeleportMap.Teleport.performed += TeleportReticleInput;
-        _playerControls.TeleportMap.Up.performed += LookUp;
-        _playerControls.TeleportMap.Down.performed += LookDown;
-        _playerControls.TeleportMap.Up.canceled += LookUpCancel;
-        _playerControls.TeleportMap.Down.canceled += LookDownCancel;
     }
 
     private void OnDisable()
@@ -115,11 +111,6 @@ public class PlayerController : MonoBehaviour
         _playerControls.TeleportMap.Down.canceled -= ReticleDownCancel;
         _playerControls.TeleportMap.Left.canceled -= ReticleLeftCancel;
         _playerControls.TeleportMap.Right.canceled -= ReticleRightCancel;
-
-        _playerControls.TeleportMap.Up.performed -= LookUp;
-        _playerControls.TeleportMap.Down.performed -= LookDown;
-        _playerControls.TeleportMap.Up.canceled -= LookUpCancel;
-        _playerControls.TeleportMap.Down.canceled -= LookDownCancel;
         _playerReticle.SetActive(false);
         _playerControls.Disable();
     }
@@ -192,26 +183,6 @@ public class PlayerController : MonoBehaviour
         _moveRight = false;
     }
 
-    private void LookUp(InputAction.CallbackContext obj)
-    {
-        _lookingUp = true;
-    }
-
-    private void LookDown(InputAction.CallbackContext obj)
-    {
-        _lookingDown = true;
-    }
-
-    private void LookUpCancel(InputAction.CallbackContext obj)
-    {
-        _lookingUp = false;
-    }
-
-    private void LookDownCancel(InputAction.CallbackContext obj)
-    {
-        _lookingDown = false;
-    }
-
     private IEnumerator TeleportCooldown()
     {
         _placingReticle = false;
@@ -247,24 +218,6 @@ public class PlayerController : MonoBehaviour
                 _updatePlayerPos = transform.position;
                 _updatePlayerPos.x = _playerMaxBackPos.x;
                 transform.position = _updatePlayerPos;
-            }
-
-            if (_lookingUp)
-            {
-                playerAnimator.SetBool("LookUp", true);
-            }
-            else
-            {
-                playerAnimator.SetBool("LookUp", false);
-            }
-
-            if (_lookingDown)
-            {
-                playerAnimator.SetBool("LookDown", true);
-            }
-            else
-            {
-                playerAnimator.SetBool("LookDown", false);
             }
         }
         else
@@ -328,36 +281,63 @@ public class PlayerController : MonoBehaviour
 
         if (!_placingReticle)
         {
+            if (verticalDirection > 0)
+            {
+                _lookingUp = true;
+                _lookingDown = false;
+                playerAnimator.SetBool("LookDown", false);
+                playerAnimator.SetBool("WalkingLookDown", false);
+            }
+            if (verticalDirection < 0)
+            {
+                _lookingUp = false;
+                _lookingDown = true;
+                playerAnimator.SetBool("LookUp", false);
+                playerAnimator.SetBool("WalkingLookUp", false);
+            }
+            if (verticalDirection == 0)
+            {
+                _lookingUp = false;
+                _lookingDown = false;
+                playerAnimator.SetBool("LookUp", false);
+                playerAnimator.SetBool("LookDown", false);
+                playerAnimator.SetBool("WalkingLookUp", false);
+                playerAnimator.SetBool("WalkingLookDown", false);
+            }
             if (!_lookingDown && !_lookingUp || _lookingDown && _lookingUp)
             {
-                if (context.started)
+                if (horizontalVelocity != 0)
                 {
                     playerAnimator.SetBool("Walking", true);
                 }
-                else if (context.canceled)
+                if (horizontalVelocity == 0)
                 {
                     playerAnimator.SetBool("Walking", false);
                 }
             }
             if (!_lookingDown && _lookingUp)
             {
-                if (context.started)
+                if (horizontalVelocity != 0)
                 {
                     playerAnimator.SetBool("WalkingLookUp", true);
+                    playerAnimator.SetBool("LookUp", false);
                 }
-                else if (context.canceled)
+                if (horizontalVelocity == 0)
                 {
+                    playerAnimator.SetBool("LookUp", true);
                     playerAnimator.SetBool("WalkingLookUp", false);
                 }
             }
             if (_lookingDown && !_lookingUp)
             {
-                if (context.started)
+                if (horizontalVelocity != 0)
                 {
                     playerAnimator.SetBool("WalkingLookDown", true);
+                    playerAnimator.SetBool("LookDown", false);
                 }
-                else if (context.canceled)
+                if (horizontalVelocity == 0)
                 {
+                    playerAnimator.SetBool("LookDown", true);
                     playerAnimator.SetBool("WalkingLookDown", false);
                 }
             }
