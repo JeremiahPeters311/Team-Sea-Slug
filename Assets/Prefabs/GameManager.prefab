@@ -48,6 +48,14 @@ MonoBehaviour:
   _enemyBulletTagName: Projectile
   _gameBeginningTransform: {fileID: 0}
   _playerHitWaitDelay: 1.5
+  teleportMeter: 10
+  _refillRate: 0.01
+  _meterText: {fileID: 0}
+  _mainCam: {fileID: 0}
+  _player: {fileID: 0}
+  _checkAdjust: 10
+  _cameraCollisionChecker: {fileID: 0}
+  _startAreaCameraOffset: 5
   onPlayerGameOver:
     m_PersistentCalls:
       m_Calls: []
