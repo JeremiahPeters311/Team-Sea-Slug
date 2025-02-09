@@ -353,6 +353,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1124322027 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3373838269258004252, guid: 952356754f69ce8408b03c8d806a086a, type: 3}
+  m_PrefabInstance: {fileID: 9055939979068600625}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1467629093
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,13 +683,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 884097311311021818, guid: 33d1cd06ddd17ce409bff3885b8a04eb, type: 3}
+      propertyPath: _meterText
+      value: 
+      objectReference: {fileID: 1124322027}
     - target: {fileID: 4176010260528189271, guid: 33d1cd06ddd17ce409bff3885b8a04eb, type: 3}
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 4176010260528189271, guid: 33d1cd06ddd17ce409bff3885b8a04eb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4857734447366264291, guid: 33d1cd06ddd17ce409bff3885b8a04eb, type: 3}
       propertyPath: m_LocalPosition.x
