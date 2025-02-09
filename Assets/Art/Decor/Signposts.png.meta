@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 026ef401b157ed346ae198de299c7715
+guid: cbb369e4bc1133b43a4b11bce23ad8fa
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ConstructionWindows_0
+      name: Signposts_0
       rect:
         serializedVersion: 2
-        x: 18
-        y: 1
-        width: 27
-        height: 28
+        x: 2
+        y: 3
+        width: 12
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 956d2d5451d187144b9ddb81665f01df
-      internalID: -221618574
+      spriteID: e0ab979fe7362c447bf1d7a67ea35139
+      internalID: 748584308
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ConstructionWindows_1
+      name: Signposts_1
       rect:
         serializedVersion: 2
-        x: 82
-        y: 1
-        width: 27
-        height: 28
+        x: 16
+        y: 3
+        width: 16
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 69dc47598602a044c820a0517425c62d
-      internalID: -1012589299
+      spriteID: 31038e8496553994e8d77c1e02deffeb
+      internalID: 1830012488
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ConstructionWindows_2
+      name: Signposts_2
       rect:
         serializedVersion: 2
-        x: 146
-        y: 1
-        width: 27
-        height: 28
+        x: 36
+        y: 3
+        width: 8
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 27f0cd4da6e259f46bea3adef26f9f4a
-      internalID: -768143951
+      spriteID: cd490ebbd494bc949b616350941afba3
+      internalID: -760948339
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ConstructionWindows_3
+      name: Signposts_3
       rect:
         serializedVersion: 2
-        x: 210
-        y: 1
-        width: 27
-        height: 29
+        x: 49
+        y: 3
+        width: 14
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,20 +187,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42e29c57d68e54e4abb5638750269261
-      internalID: -542161578
+      spriteID: e76c9185740099348a224c8a993af778
+      internalID: 576535512
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ConstructionWindows_4
+      name: Signposts_4
       rect:
         serializedVersion: 2
-        x: 274
-        y: 1
-        width: 27
-        height: 28
+        x: 64
+        y: 3
+        width: 16
+        height: 44
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,29 +208,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00df1e273daf45443930761db47549d6
-      internalID: -1889177569
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ConstructionWindows_5
-      rect:
-        serializedVersion: 2
-        x: 338
-        y: 1
-        width: 27
-        height: 28
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b9446af349054e3479e9a24a3b2ba967
-      internalID: 1651800779
+      spriteID: 1f11d7593e5253b4a9cbf1af9c710689
+      internalID: 1309227365
       vertices: []
       indices: 
       edges: []
@@ -246,12 +225,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ConstructionWindows_0: -221618574
-      ConstructionWindows_1: -1012589299
-      ConstructionWindows_2: -768143951
-      ConstructionWindows_3: -542161578
-      ConstructionWindows_4: -1889177569
-      ConstructionWindows_5: 1651800779
+      Signposts_0: 748584308
+      Signposts_1: 1830012488
+      Signposts_2: -760948339
+      Signposts_3: 576535512
+      Signposts_4: 1309227365
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

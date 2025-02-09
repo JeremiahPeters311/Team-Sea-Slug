@@ -29,6 +29,14 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private TMP_Text _meterText;
 
+    [SerializeField]
+    private Camera _mainCam;
+    [SerializeField]
+    private GameObject _player;
+
+    private Vector2 _playerPos;
+    private Vector3 _camPos;
+
     public UnityEvent onPlayerGameOver;
     PlayerController player;
 
@@ -38,26 +46,20 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
-    private void FixedUpdate()
+    private void Awake()
     {
-        UpdateTeleportMeter();
+        _playerPos = _player.transform.position;
+        _camPos = _mainCam.transform.position;
     }
 
-    private void UpdateTeleportMeter() 
+    private void FixedUpdate()
     {
-        if (teleportMeter < 10)
+        if (player.playerMovingForward)
         {
-            teleportMeter += _refillRate;
+            _playerPos = _player.transform.position;
+            _camPos.x = _playerPos.x;
+            _mainCam.transform.position = _camPos;
         }
-
-        _meterText.text = "Meter:" + teleportMeter.ToString();
-
-        if (teleportMeter <= 10)
-        {
-            return;
-        }
-
-        teleportMeter = 10;
     }
 
     public void RestartGame() 
