@@ -25,7 +25,7 @@ public class PlantEnemy : MonoBehaviour
     /// </summary>
     private void Spawn()
     {
-        var offset = new Vector3(0f, -1.5f, 0f);
+        var offset = new Vector3(0f, -0.2f, 0f);
 
         Instantiate(objectToDrop, gameObject.transform.position + offset, Quaternion.identity);
     }

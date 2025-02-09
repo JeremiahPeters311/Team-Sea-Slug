@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   launchForce: 250
-  speed: 3
+  speed: 2
   target: {fileID: 0}
 --- !u!95 &6515095852304220410
 Animator:
