@@ -32,7 +32,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Camera _mainCam;
     [SerializeField]
-    private GameObject _player;
 
     private Vector2 _playerPos;
     private Vector3 _camPos;
@@ -43,12 +42,12 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Instance = this;
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     private void Awake()
     {
-        _playerPos = _player.transform.position;
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        _playerPos = player.transform.position;
         _camPos = _mainCam.transform.position;
     }
 
@@ -56,7 +55,7 @@ public class GameManager : MonoBehaviour
     {
         if (player.playerMovingForward)
         {
-            _playerPos = _player.transform.position;
+            _playerPos = player.transform.position;
             _camPos.x = _playerPos.x;
             _mainCam.transform.position = _camPos;
         }
