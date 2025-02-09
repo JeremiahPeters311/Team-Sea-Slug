@@ -12,6 +12,8 @@ public class BirdBehaviour : MonoBehaviour
 
     [SerializeField] private AudioClip pigeonCall;
 
+    private Vector2 targetposition;
+
     private Animator Anim;
 
     private bool IsAttacking = false;
@@ -43,11 +45,16 @@ public class BirdBehaviour : MonoBehaviour
                 }
                 Anim.SetBool("isAttack", true);
                 var step = BirdSpeed * Time.deltaTime;
-                var trackingposition = new Vector2(PlayerRef.transform.position.x, PlayerRef.transform.position.y);
-                transform.position = Vector3.MoveTowards(transform.position, trackingposition, BirdSpeed * step);
+                
+                transform.position = Vector3.MoveTowards(transform.position, targetposition, BirdSpeed * step);
                 StartCoroutine(WaitTimer(2f));
             }
         }
+    }
+
+    private void gettargetposition()
+    {
+        targetposition = new Vector2(PlayerRef.transform.position.x, PlayerRef.transform.position.y);
     }
 
     private void OnBecameVisible()
