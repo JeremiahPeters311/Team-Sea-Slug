@@ -8,7 +8,8 @@ public class Plant : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //SFXManager.instance.PlaySoundEffct(potBreak, transform, 1f);
-        Destroy(gameObject);
         SFXManager.instance.PlaySoundEffct(potBreak, transform, 1f);
+        Destroy(gameObject);
+        
     }
 }
