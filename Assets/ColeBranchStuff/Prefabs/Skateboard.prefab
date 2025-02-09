@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7687547244740327860}
   - component: {fileID: 3437707967106952909}
   m_Layer: 0
-  m_Name: LeftSkateboard
+  m_Name: Skateboard
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
