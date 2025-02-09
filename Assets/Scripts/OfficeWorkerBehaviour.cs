@@ -11,6 +11,10 @@ public class OfficeWorkerBehaviour : MonoBehaviour
     [SerializeField] private GameObject PlayerRef;
 
     private bool IsAttacking = false;
+    private void Start()
+    {
+        PlayerRef = GameObject.FindGameObjectWithTag("Player");
+    }
 
     private void Update()
     {
