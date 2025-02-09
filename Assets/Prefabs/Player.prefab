@@ -223,10 +223,8 @@ MonoBehaviour:
   _reticleSpeed: 0.3
   _placingReticle: 0
   _maxTeleportDistance: 5
-  _maxBackRange: 7
+  _maxBackRange: 9
   playerMovingForward: 1
-  nextRoom: 0
-  startAreaPos: {x: 0, y: 0}
   _cooldownTime: 1
 --- !u!114 &8807848524845751809
 MonoBehaviour:
