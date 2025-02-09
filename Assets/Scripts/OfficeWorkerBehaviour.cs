@@ -63,11 +63,19 @@ public class OfficeWorkerBehaviour : MonoBehaviour
         StartCoroutine(WaitTimer(2f));
     }
 
+    private IEnumerator DeathTimer(float WaitTime)
+    {
+        yield return new WaitForSeconds(WaitTime);
+        Destroy(gameObject);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "PlayerProjectile")
         {
-            Debug.Log("die");
+            Anim.SetBool("hit", true);
+            gameObject.GetComponent<BoxCollider2D>().size = new Vector2(0.15f, 0.1f);
+            StartCoroutine(DeathTimer(0.75f));
         }
     }
 }
