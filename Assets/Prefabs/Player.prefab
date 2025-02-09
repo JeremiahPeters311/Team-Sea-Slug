@@ -208,8 +208,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lives: 3
   _jumpHeight: 10
-  groundHorizontalMoveSpeed: 10
-  airHorizontalMoveSpeed: 10
+  groundHorizontalMoveSpeed: 4.5
+  airHorizontalMoveSpeed: 4.5
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -218,6 +218,7 @@ MonoBehaviour:
     m_Bits: 64
   groundCheck: {fileID: 8348112863721753543}
   platform: {fileID: 0}
+  teleport: {fileID: 8300000, guid: b76bc5df546679f44aff3530a267ca63, type: 3}
   _newspaperBulletPrefab: {fileID: 0}
   _playerReticle: {fileID: 9160855261751938352}
   _reticleSpeed: 0.3

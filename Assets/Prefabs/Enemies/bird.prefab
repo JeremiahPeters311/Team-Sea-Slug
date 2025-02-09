@@ -98,5 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BirdSpeed: 5
-  PlayerDetectionRange: 8
-  PlayerRef: {fileID: 0}
+  PlayerDetectionRange: 0.5
+  PlayerRef: {fileID: 6680031713736237270, guid: 0e232942e6dbde04aade6c4406228a17, type: 3}
+  pigeonCall: {fileID: 8300000, guid: 99f2b1555b6da5f409392798f00e9c3d, type: 3}
