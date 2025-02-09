@@ -8051,8 +8051,8 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 752696317}
     m_Modifications:
-    - target: {fileID: 1287733001208253405, guid: aa8998f6060b2a5438cf64ac45586a45, type: 3}
-      propertyPath: m_Enabled
+    - target: {fileID: 1019015746672206762, guid: aa8998f6060b2a5438cf64ac45586a45, type: 3}
+      propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1763082554584517471, guid: aa8998f6060b2a5438cf64ac45586a45, type: 3}
@@ -8096,9 +8096,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2563444703510065278, guid: aa8998f6060b2a5438cf64ac45586a45, type: 3}
-      propertyPath: spawnToLeft
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: spawnZone
+      value: 
+      objectReference: {fileID: 1943525867}
+    - target: {fileID: 2563444703510065278, guid: aa8998f6060b2a5438cf64ac45586a45, type: 3}
+      propertyPath: skateboard
+      value: 
+      objectReference: {fileID: 840626544856089476, guid: 461168e64b6957c4b8fd5255e241f578, type: 3}
     - target: {fileID: 7863412882708068947, guid: aa8998f6060b2a5438cf64ac45586a45, type: 3}
       propertyPath: m_Name
       value: SkateboardSpawner
@@ -10886,10 +10890,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
-    - target: {fileID: 789527687926628467, guid: 7d926c531361bcc40b77be2c94f4b159, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2625229481676479508, guid: 7d926c531361bcc40b77be2c94f4b159, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.76
@@ -10929,10 +10929,6 @@ PrefabInstance:
     - target: {fileID: 2625229481676479508, guid: 7d926c531361bcc40b77be2c94f4b159, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6401234110051296179, guid: 7d926c531361bcc40b77be2c94f4b159, type: 3}
-      propertyPath: orthographic size
-      value: 1.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14349,6 +14345,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3981047242911928977, guid: fa4ba0d9409e77145975b689140e2e3c, type: 3}
   m_PrefabInstance: {fileID: 1920807785}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1943525867 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6732287700803105102, guid: 7d926c531361bcc40b77be2c94f4b159, type: 3}
+  m_PrefabInstance: {fileID: 1515190707}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1945435788
 PrefabInstance:

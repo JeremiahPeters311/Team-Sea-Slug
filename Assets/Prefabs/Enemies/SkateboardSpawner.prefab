@@ -99,10 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnInterval: 5
-  rightSkateboard: {fileID: 840626544856089476, guid: 5de388d64a1daec43be3d7a71a4ba883, type: 3}
-  leftSkateboard: {fileID: 840626544856089476, guid: 461168e64b6957c4b8fd5255e241f578, type: 3}
-  spawnToRight: 0
-  spawnToLeft: 0
+  skateboard: {fileID: 840626544856089476, guid: 461168e64b6957c4b8fd5255e241f578, type: 3}
+  spawnZone: {fileID: 0}
 --- !u!61 &1019015746672206762
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -110,7 +108,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7863412882708068947}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -132,7 +130,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
