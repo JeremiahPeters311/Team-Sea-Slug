@@ -742,6 +742,10 @@ PrefabInstance:
       value: Main Camera
       objectReference: {fileID: 0}
     - target: {fileID: 2625229481676479508, guid: 7d926c531361bcc40b77be2c94f4b159, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2625229481676479508, guid: 7d926c531361bcc40b77be2c94f4b159, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -780,6 +784,10 @@ PrefabInstance:
     - target: {fileID: 2625229481676479508, guid: 7d926c531361bcc40b77be2c94f4b159, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6401234110051296179, guid: 7d926c531361bcc40b77be2c94f4b159, type: 3}
+      propertyPath: orthographic size
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1189,6 +1197,10 @@ PrefabInstance:
     - target: {fileID: 1181187835406146056, guid: 0e232942e6dbde04aade6c4406228a17, type: 3}
       propertyPath: _maxBackRange
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1181187835406146056, guid: 0e232942e6dbde04aade6c4406228a17, type: 3}
+      propertyPath: _reticleSpeed
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 1181187835406146056, guid: 0e232942e6dbde04aade6c4406228a17, type: 3}
       propertyPath: _managerObject

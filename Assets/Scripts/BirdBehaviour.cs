@@ -12,8 +12,16 @@ public class BirdBehaviour : MonoBehaviour
 
     [SerializeField] private AudioClip pigeonCall;
 
+    private Animator Anim;
+
     private bool IsAttacking = false;
 
+    private bool CanPlaySound = true;
+
+    private void Awake()
+    {
+        Anim = GetComponent<Animator>();
+    }
     private void Update()
     {
         if (IsAttacking == false)
@@ -24,9 +32,33 @@ public class BirdBehaviour : MonoBehaviour
         if (Vector3.Distance(gameObject.transform.position, PlayerRef.transform.position) < PlayerDetectionRange)
         {
             IsAttacking = true;
-            SFXManager.instance.PlaySoundEffct(pigeonCall, transform, 1f);
+            if (CanPlaySound == true)
+            {
+                StartCoroutine(SoundTimer(2f));
+                SFXManager.instance.PlaySoundEffct(pigeonCall, transform, 1f);
+            }
+            Anim.SetBool("isAttack", true);
             var step = BirdSpeed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, PlayerRef.transform.position, BirdSpeed * step);
+            StartCoroutine(WaitTimer(2f));
         }
+    }
+
+    private IEnumerator WaitTimer(float WaitTime)
+    {
+        yield return new WaitForSeconds(WaitTime);
+        Destroy(gameObject);
+    }
+
+    private IEnumerator SoundTimer(float WaitTime)
+    {
+        CanPlaySound = false;
+        yield return new WaitForSeconds(WaitTime);
+        CanPlaySound = true;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Destroy(gameObject);
     }
 }
