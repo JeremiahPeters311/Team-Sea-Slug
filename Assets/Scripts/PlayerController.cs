@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float _maxTeleportDistance = 10f;
 
+    public bool nextRoom = false;
+
     private int testCount = 0;
 
     [SerializeField] private float _cooldownTime = 1f;
@@ -305,6 +307,22 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Resetting Platform");
             platform.ExitPlatform();
             platform = null;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("EndAreaMarker"))
+        {
+            nextRoom = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("EndAreaMarker"))
+        {
+            nextRoom = false;
         }
     }
 

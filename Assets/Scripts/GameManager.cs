@@ -57,23 +57,23 @@ public class GameManager : MonoBehaviour
         Instance = this;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         _levelCheckerScript = _levelChecker.GetComponent<RoomCheckerCollision>();
+        _levelCheckerScript.startAreaPos.x = _defaultStartPos;
     }
 
     private void Awake()
     {
         _playerPos = _player.transform.position;
         _camPos = _mainCam.transform.position;
-        _levelCheckerScript.startAreaPos.x = _defaultStartPos;
     }
 
     private void FixedUpdate()
     {
         if (!_levelCheckerScript.atEndOfArea)
         {
-            Debug.Log(_levelCheckerScript.startAreaPos.x + _startAreaCameraOffset);
+            _playerPos = _player.transform.position;
+
             if (_player.transform.position.x >= _levelCheckerScript.startAreaPos.x + _startAreaCameraOffset) 
             {
-                _playerPos = _player.transform.position;
                 _camPos.x = _playerPos.x;
                 _mainCam.transform.position = _camPos; 
             }
@@ -82,13 +82,14 @@ public class GameManager : MonoBehaviour
             _levelChecker.transform.position = _playerPos;
         }
 
-        if (!_levelCheckerScript.nextRoom)
+        if (!player.nextRoom)
         {
             return;
         }
 
         _camPos.x = _levelCheckerScript.startAreaPos.x + 10f;
         _mainCam.transform.position = _camPos;
+        _levelCheckerScript.atEndOfArea = false;
     }
 
     public void RestartGame() 
