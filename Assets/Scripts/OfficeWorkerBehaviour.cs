@@ -59,7 +59,7 @@ public class OfficeWorkerBehaviour : MonoBehaviour
         canAttack = false;
         yield return new WaitForSeconds(WaitTime);
         canAttack = true;
-        yield return new WaitForSeconds(0.01f);
+        yield return 0;
         StartCoroutine(WaitTimer(2f));
     }
 
