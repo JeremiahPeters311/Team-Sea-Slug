@@ -309,7 +309,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Entered: " + collision.gameObject.name);
         if (collision.gameObject.layer == LayerMask.NameToLayer("Platform"))
         {
             platform = collision.gameObject.GetComponent<PassthroughPlatform>();
