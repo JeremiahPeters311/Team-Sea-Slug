@@ -16,14 +16,7 @@ public class Skateboard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gameObject.name.Contains("RightSkateboard"))
-        {
-            rb2d.velocity = new Vector2(speed, 0);
-        }
-        else
-        {
-            rb2d.velocity = new Vector2(-speed, 0);
-        }
+        rb2d.velocity = new Vector2(-speed, 0);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -36,6 +29,9 @@ public class Skateboard : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(gameObject);
+        if(collision.gameObject.name.Contains("Player"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
