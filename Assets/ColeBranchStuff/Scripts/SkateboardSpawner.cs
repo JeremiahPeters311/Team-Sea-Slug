@@ -10,9 +10,9 @@ public class SkateboardSpawner : MonoBehaviour
     [SerializeField] private GameObject skateboard;
     [SerializeField] private GameObject spawnZone;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
+        spawnZone = GameObject.Find("CatSpawnZone");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
