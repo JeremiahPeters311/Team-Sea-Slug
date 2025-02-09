@@ -45,7 +45,7 @@ public class Manhole : MonoBehaviour
             
         }
 
-        if (waterCount)
+        if (waterCount && visible)
         {
             waterTime += Time.deltaTime;
             if (waterTime > waterInterval)

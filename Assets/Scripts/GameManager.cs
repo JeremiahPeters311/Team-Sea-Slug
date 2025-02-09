@@ -23,11 +23,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     [Tooltip("Period of time to wait after the player gets hit to play an animation, before sending them to the start of the level or triggering the game over screen")]
     float _playerHitWaitDelay;
-    public float teleportMeter = 10f;
-    [SerializeField]
-    private float _refillRate = 0.01f;
-    [SerializeField]
-    private TMP_Text _meterText;
 
     [SerializeField]
     private Camera _mainCam;
@@ -88,12 +83,14 @@ public class GameManager : MonoBehaviour
         {
             player.playerAnimator.SetBool("Damage", false);
             player.playerAnimator.SetBool("Die", true);
+            player.gameOver = true;
             onPlayerGameOver.Invoke();
         }
         else 
         {
             player.playerAnimator.SetBool("Damage", false);
             player.transform.position = _gameBeginningTransform.position;
+            player.gameOver = false;
             StartCoroutine(player.EnableControls());
         }
     }

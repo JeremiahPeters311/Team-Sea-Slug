@@ -79,6 +79,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float _slowedTime = 0.2f;
 
+    public bool gameOver = false;
+
     private void Awake()
     {
         _playerReticle.SetActive(false);
@@ -134,7 +136,7 @@ public class PlayerController : MonoBehaviour
 
     private void TeleportReticleInput(InputAction.CallbackContext obj)
     {
-        if (!_placingReticle && !_teleported)
+        if (!_placingReticle && !_teleported && !gameOver)
         {
             _playerReticle.SetActive(true);
             _teleportRange.SetActive(true);
@@ -156,7 +158,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (_teleportCollision.canTeleport && !_teleported && _reticlePosition.y >= _worldBaseY)
+            if (_teleportCollision.canTeleport && !_teleported && _reticlePosition.y >= _worldBaseY && !gameOver)
             {
                 transform.position = _reticlePosition;
                 _teleported = true;
