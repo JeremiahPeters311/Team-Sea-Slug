@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
 
     private void TeleportReticleInput(InputAction.CallbackContext obj)
     {
-        if (!_placingReticle)
+        if (!_placingReticle && !_teleported)
         {
             _playerReticle.SetActive(true);
             _placingReticle = true;
@@ -154,8 +154,8 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator TeleportCooldown()
     {
-        yield return new WaitForSeconds(_cooldownTime);
         _placingReticle = false;
+        yield return new WaitForSeconds(_cooldownTime);
         _teleported = false;
     }
 

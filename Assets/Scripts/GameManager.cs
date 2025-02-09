@@ -32,20 +32,22 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Camera _mainCam;
     [SerializeField]
-    private GameObject _nextRoomCheck;
-    private RoomCheckerCollision _roomCheckerCollision;
-    [SerializeField]
     private GameObject _player;
     [SerializeField]
     private float _checkAdjust = 10f;
     [SerializeField]
-    private float _screenWidthSize = 23f;
-    [SerializeField]
-    private float _cameraAdjust = 18f;
+    private GameObject _levelChecker;
+    private RoomCheckerCollision _levelCheckerScript;
 
-    private Vector2 _roomCheckPos;
+    [SerializeField]
+    private float _defaultStartPos = -7f;
+    [SerializeField]
+    private float _startAreaCameraOffset = 5f;
+    [SerializeField]
+    private float _levelCheckPosOffset = 5f;
+
     private Vector2 _playerPos;
-    private Vector2 _camPos;
+    private Vector3 _camPos;
 
     public UnityEvent onPlayerGameOver;
     PlayerController player;
@@ -54,29 +56,39 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        _roomCheckerCollision = _nextRoomCheck.GetComponent<RoomCheckerCollision>();
+        _levelCheckerScript = _levelChecker.GetComponent<RoomCheckerCollision>();
     }
 
     private void Awake()
     {
-        _roomCheckPos = _nextRoomCheck.transform.position;
         _playerPos = _player.transform.position;
-        //_camPos = _mainCam.transform.position;
-        _roomCheckPos.x = _playerPos.x + _checkAdjust;
-        _nextRoomCheck.transform.position = _roomCheckPos;
+        _camPos = _mainCam.transform.position;
+        _levelCheckerScript.startAreaPos.x = _defaultStartPos;
     }
 
     private void FixedUpdate()
     {
-        if (!_roomCheckerCollision.nextRoom)
+        if (!_levelCheckerScript.atEndOfArea)
+        {
+            Debug.Log(_levelCheckerScript.startAreaPos.x + _startAreaCameraOffset);
+            if (_player.transform.position.x >= _levelCheckerScript.startAreaPos.x + _startAreaCameraOffset) 
+            {
+                _playerPos = _player.transform.position;
+                _camPos.x = _playerPos.x;
+                _mainCam.transform.position = _camPos; 
+            }
+
+            _playerPos.x += _levelCheckPosOffset;
+            _levelChecker.transform.position = _playerPos;
+        }
+
+        if (!_levelCheckerScript.nextRoom)
         {
             return;
         }
 
-        _roomCheckPos.x += _screenWidthSize;
-        _nextRoomCheck.transform.position = _roomCheckPos;
-        //_camPos.x += _cameraAdjust;
-        //_mainCam.transform.position = _camPos;
+        _camPos.x = _levelCheckerScript.startAreaPos.x + 10f;
+        _mainCam.transform.position = _camPos;
     }
 
     public void RestartGame() 
