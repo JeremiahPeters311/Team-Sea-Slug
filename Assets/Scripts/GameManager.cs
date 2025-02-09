@@ -88,12 +88,14 @@ public class GameManager : MonoBehaviour
         {
             player.playerAnimator.SetBool("Damage", false);
             player.playerAnimator.SetBool("Die", true);
+            player.gameOver = true;
             onPlayerGameOver.Invoke();
         }
         else 
         {
             player.playerAnimator.SetBool("Damage", false);
             player.transform.position = _gameBeginningTransform.position;
+            player.gameOver = false;
             StartCoroutine(player.EnableControls());
         }
     }
