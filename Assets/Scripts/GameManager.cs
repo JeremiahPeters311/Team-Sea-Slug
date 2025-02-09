@@ -68,20 +68,6 @@ public class GameManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //if (teleportMeter < 10)
-        //{
-        //teleportMeter += _refillRate;
-        //}
-
-        //_meterText.text = "Meter:" + teleportMeter.ToString();
-
-        //if (teleportMeter <= 10)
-        //{
-        //return;
-        //}
-
-        //teleportMeter = 10;
-
         if (!_roomCheckerCollision.nextRoom)
         {
             return;

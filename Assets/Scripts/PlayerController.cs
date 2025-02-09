@@ -36,9 +36,7 @@ public class PlayerController : MonoBehaviour
     GameObject _newspaperBulletPrefab;
 
     [SerializeField] private GameObject _playerReticle;
-    [SerializeField] private GameObject _managerObject;
     private PlayerControls _playerControls;
-    private GameManager _gameManager;
     [SerializeField] private float _reticleSpeed = 0.3f;
     private Vector3 _reticlePosition;
     [SerializeField] private bool _placingReticle = false;
@@ -54,6 +52,8 @@ public class PlayerController : MonoBehaviour
     private int testCount = 0;
 
     [SerializeField] private float _cooldownTime = 1f;
+    SpriteRenderer _spriteRenderer;
+
 
     private void Awake()
     {
@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
         _playerControls = new PlayerControls();
         _reticlePosition = _playerReticle.transform.position;
         _teleportCollision = _playerReticle.GetComponent<TeleportCollision>();
-        _gameManager = _managerObject.GetComponent<GameManager>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
 
     private void TeleportReticleInput(InputAction.CallbackContext obj)
     {
-        if (!_placingReticle) //&& _gameManager.teleportMeter >= 2f)
+        if (!_placingReticle)
         {
             _playerReticle.SetActive(true);
             _placingReticle = true;
@@ -109,12 +109,11 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (_teleportCollision.canTeleport && !_teleported) //&& _gameManager.teleportMeter >= 2f)
+            if (_teleportCollision.canTeleport && !_teleported)
             {
                 transform.position = _reticlePosition;
                 _teleported = true;
                 StartCoroutine(TeleportCooldown());
-                _gameManager.teleportMeter -= 2f;
                 _playerReticle.SetActive(false);
             }
         }
@@ -216,6 +215,14 @@ public class PlayerController : MonoBehaviour
     {
         verticalDirection = context.ReadValue<Vector2>().y;
         horizontalVelocity = context.ReadValue<Vector2>().x;
+        if (horizontalVelocity < 0)
+        {
+            _spriteRenderer.flipX = true;
+        }
+        else if(horizontalVelocity > 0)
+        {
+            _spriteRenderer.flipX = false;
+        }
     }
 
     public void OnPlayerJump(InputAction.CallbackContext context)
@@ -229,6 +236,16 @@ public class PlayerController : MonoBehaviour
             _smoothMovementVelocity.y = 0;
         }
 
+    }
+
+    public void OnPlayerFire(InputAction.CallbackContext context) 
+    {
+        if (context.started) 
+        {
+            var bulletSent = Instantiate(_newspaperBulletPrefab, transform.position, Quaternion.identity).GetComponent<PlayerBullet>();
+            bulletSent.SetDirection(new Vector2(horizontalVelocity, verticalDirection), _spriteRenderer.flipX);
+
+        }
     }
 
     private void JumpAction()
