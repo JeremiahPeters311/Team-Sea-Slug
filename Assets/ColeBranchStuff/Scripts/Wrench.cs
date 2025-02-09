@@ -10,6 +10,7 @@ public class Wrench : MonoBehaviour
 
     [SerializeField] private float speed;
     [SerializeField] private GameObject target;
+    [SerializeField] private AudioClip wrenchLand;
 
     private bool goingToPlayer;
 
@@ -32,6 +33,7 @@ public class Wrench : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         rb2d.AddForce(new Vector2(0, launchForce));
+        SFXManager.instance.PlaySoundEffct(wrenchLand, transform, 1f);
 
         goingToPlayer = true;
 

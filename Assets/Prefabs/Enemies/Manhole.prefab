@@ -102,9 +102,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnInterval: 5
   waterInterval: 0.5
+  waterFlow: {fileID: 8300000, guid: b2bbda34b2e475f4ea6356cbba7d7bf8, type: 3}
   launchForce: 225
   leftDrop: {fileID: 4062412017562896837, guid: 053a78460e611934f91a52ae5a20da5f, type: 3}
   rightDrop: {fileID: 1595634955795842611, guid: 0c25733386c634548b831d00a5c062ae, type: 3}
+  manholeDrop: {fileID: 8300000, guid: 93f11b2b0308c624f8c4f0ede86d7a8b, type: 3}
 --- !u!70 &1226317434645931431
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

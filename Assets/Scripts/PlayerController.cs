@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     GameObject _newspaperBulletPrefab;
 
     [SerializeField] private GameObject _playerReticle;
+    [SerializeField] private GameObject _teleportRange;
     private PlayerControls _playerControls;
     [SerializeField] private float _reticleSpeed = 0.3f;
     private Vector3 _reticlePosition;
@@ -46,6 +47,14 @@ public class PlayerController : MonoBehaviour
     private bool _moveDown = false;
     private bool _moveLeft = false;
     private bool _moveRight = false;
+
+    private bool _lookingUp = false;
+    private bool _lookingDown = false;
+
+    //Prevents the player from teleporting beneath the level.
+    [SerializeField] private float _worldBaseY = -1.255f;
+
+    public Animator playerAnimator;
 
     [SerializeField] private float _maxTeleportDistance = 10f;
     
@@ -59,11 +68,18 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float _cooldownTime = 1f;
     SpriteRenderer _spriteRenderer;
-
+    [SerializeField]
+    private string[] hurtPlayerCollisionTags;
+    [SerializeField]
+    private bool isInvulnerable = false;
+    [SerializeField]
+    private float invulnerabilitySeconds = 2;
 
     private void Awake()
     {
         _playerReticle.SetActive(false);
+        _teleportRange.SetActive(false);
+        _teleportRange.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
         _playerControls = new PlayerControls();
         _reticlePosition = _playerReticle.transform.position;
         _playerMaxBackPos = transform.position;
@@ -71,7 +87,7 @@ public class PlayerController : MonoBehaviour
         _playerMaxBackPos.x -= _maxBackRange;
         _teleportCollision = _playerReticle.GetComponent<TeleportCollision>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-
+        playerAnimator = GetComponent<Animator>();
         _playerControls.PlayerActionMap.Disable();
     }
 
@@ -107,6 +123,7 @@ public class PlayerController : MonoBehaviour
         _playerControls.TeleportMap.Left.canceled -= ReticleLeftCancel;
         _playerControls.TeleportMap.Right.canceled -= ReticleRightCancel;
         _playerReticle.SetActive(false);
+        _teleportRange.SetActive(false);
         _playerControls.Disable();
     }
 
@@ -115,7 +132,12 @@ public class PlayerController : MonoBehaviour
         if (!_placingReticle && !_teleported)
         {
             _playerReticle.SetActive(true);
+            _teleportRange.SetActive(true);
             _placingReticle = true;
+            playerAnimator.SetBool("TeleportPre", true);
+            playerAnimator.SetBool("Walking", false);
+            playerAnimator.SetBool("WalkingLookUp", false);
+            playerAnimator.SetBool("WalkingLookDown", false);
             _playerControls.TeleportMap.Up.performed += ReticleUp;
             _playerControls.TeleportMap.Down.performed += ReticleDown;
             _playerControls.TeleportMap.Left.performed += ReticleLeft;
@@ -128,12 +150,16 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (_teleportCollision.canTeleport && !_teleported)
+            if (_teleportCollision.canTeleport && !_teleported && _reticlePosition.y >= _worldBaseY)
             {
                 transform.position = _reticlePosition;
                 _teleported = true;
+                playerAnimator.SetBool("TeleportPre", false);
+                playerAnimator.SetBool("TeleportPost", true);
                 StartCoroutine(TeleportCooldown());
+                StartCoroutine(TeleportAnimation());
                 _playerReticle.SetActive(false);
+                _teleportRange.SetActive(false);
             }
         }
     }
@@ -176,6 +202,12 @@ public class PlayerController : MonoBehaviour
         _placingReticle = false;
         yield return new WaitForSeconds(_cooldownTime);
         _teleported = false;
+    }
+
+    private IEnumerator TeleportAnimation()
+    {
+        yield return new WaitForSeconds(0.2f);
+        playerAnimator.SetBool("TeleportPost", false);
     }
 
     private void FixedUpdate()
@@ -242,6 +274,15 @@ public class PlayerController : MonoBehaviour
             }
 
             _playerReticle.transform.position = _reticlePosition;
+
+            if (!_teleportCollision.canTeleport || _reticlePosition.y < _worldBaseY)
+            {
+                _teleportRange.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0);
+            }
+            else
+            {
+                _teleportRange.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
+            }
         }
     }
 
@@ -260,19 +301,92 @@ public class PlayerController : MonoBehaviour
         {
             _spriteRenderer.flipX = false;
         }
+
+        if (!_placingReticle)
+        {
+            if (verticalDirection > 0)
+            {
+                _lookingUp = true;
+                _lookingDown = false;
+                playerAnimator.SetBool("LookDown", false);
+                playerAnimator.SetBool("WalkingLookDown", false);
+            }
+            if (verticalDirection < 0)
+            {
+                _lookingUp = false;
+                _lookingDown = true;
+                playerAnimator.SetBool("LookUp", false);
+                playerAnimator.SetBool("WalkingLookUp", false);
+            }
+            if (verticalDirection == 0)
+            {
+                _lookingUp = false;
+                _lookingDown = false;
+                playerAnimator.SetBool("LookUp", false);
+                playerAnimator.SetBool("LookDown", false);
+                playerAnimator.SetBool("WalkingLookUp", false);
+                playerAnimator.SetBool("WalkingLookDown", false);
+            }
+            if (!_lookingDown && !_lookingUp || _lookingDown && _lookingUp)
+            {
+                if (horizontalVelocity != 0)
+                {
+                    playerAnimator.SetBool("Walking", true);
+                }
+                if (horizontalVelocity == 0)
+                {
+                    playerAnimator.SetBool("Walking", false);
+                }
+            }
+            if (!_lookingDown && _lookingUp)
+            {
+                if (horizontalVelocity != 0)
+                {
+                    playerAnimator.SetBool("WalkingLookUp", true);
+                    playerAnimator.SetBool("LookUp", false);
+                    playerAnimator.SetBool("Walking", false);
+                }
+                if (horizontalVelocity == 0)
+                {
+                    playerAnimator.SetBool("LookUp", true);
+                    playerAnimator.SetBool("WalkingLookUp", false);
+                    playerAnimator.SetBool("Walking", false);
+                }
+            }
+            if (_lookingDown && !_lookingUp)
+            {
+                if (horizontalVelocity != 0)
+                {
+                    playerAnimator.SetBool("WalkingLookDown", true);
+                    playerAnimator.SetBool("LookDown", false);
+                    playerAnimator.SetBool("Walking", false);
+                }
+                if (horizontalVelocity == 0)
+                {
+                    playerAnimator.SetBool("LookDown", true);
+                    playerAnimator.SetBool("WalkingLookDown", false);
+                    playerAnimator.SetBool("Walking", false);
+                }
+            }
+        }
     }
 
     public void OnPlayerJump(InputAction.CallbackContext context)
     {
-        if (context.started)
+        Debug.Log(context);
+        if (!_placingReticle)
         {
-            JumpAction();
+            if (context.started)
+            {
+                JumpAction();
+                playerAnimator.SetBool("Jump", true);
+            }
+            else if (context.canceled)
+            {
+                _smoothMovementVelocity.y = 0;
+                playerAnimator.SetBool("Jump", false);
+            }
         }
-        else if (context.canceled)
-        {
-            _smoothMovementVelocity.y = 0;
-        }
-
     }
 
     public void OnPlayerFire(InputAction.CallbackContext context) 
@@ -286,6 +400,7 @@ public class PlayerController : MonoBehaviour
 
     private void JumpAction()
     {
+        Debug.Log(IsTouchingLayer(groundLayer));
         if (IsTouchingLayer(platformLayer) && verticalDirection <= -1 && platform != null)
         {
             platform.SetPlayerFallThrough(true);
@@ -313,7 +428,7 @@ public class PlayerController : MonoBehaviour
     /// <returns></returns>
     private bool IsTouchingLayer(LayerMask layerMask)
     {
-        return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(2.86f, 0.1f), CapsuleDirection2D.Horizontal, 0, layerMask);
+        return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(0.61f, 0.04f), CapsuleDirection2D.Horizontal, 0, layerMask);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -323,11 +438,28 @@ public class PlayerController : MonoBehaviour
             platform = collision.gameObject.GetComponent<PassthroughPlatform>();
             platform.EnterPlatform();
         }
-        if (collision.gameObject.CompareTag("Projectile")) 
+        if (CheckEnemyTagMatch(collision.gameObject)) 
         {
-            _playerControls.Disable();
+            if (isInvulnerable) 
+            {
+                return;
+            }
+            isInvulnerable = true;
+            groundHorizontalMoveSpeed = 0;
             GameManager.Instance.PlayerDamage();
         }
+    }
+
+    private bool CheckEnemyTagMatch(GameObject collidedObject) 
+    {
+        foreach (string tag in hurtPlayerCollisionTags) 
+        {
+            if (collidedObject.CompareTag(tag)) 
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -343,9 +475,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void EnableControls() 
+    public IEnumerator EnableControls() 
     {
-        _playerControls.Disable();
+        groundHorizontalMoveSpeed = 4.5f;
+        float waitInterval = invulnerabilitySeconds / 60;
+        
+        for (int i = 0; i < 60; i++) 
+        {
+            _spriteRenderer.color = new Color(1, 1, 1, _spriteRenderer.color.a == 1 ? 0.15f : 1f);
+            yield return new WaitForSeconds(waitInterval);
+        }
+        _spriteRenderer.color = new Color(1, 1, 1, 1f);
+        isInvulnerable = false;
     }
 }
 

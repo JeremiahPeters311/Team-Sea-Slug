@@ -24,6 +24,8 @@ public class TitleScreenScrolling : MonoBehaviour
 
     [SerializeField] private GameObject MainCamera;
 
+    [SerializeField] private AudioClip windowBreak;
+
     private bool _hasScrollingStarted = false;
 
     private PlayerControls _playerControls;
@@ -37,6 +39,7 @@ public class TitleScreenScrolling : MonoBehaviour
     private IEnumerator IntroTiming()
     {
         FiredAnim.SetBool("bro is fired", true);
+        SFXManager.instance.PlaySoundEffct(windowBreak, transform, 1f);
         yield return new WaitForSeconds(1.5f);
         Anim.SetBool("Game Started", true);
         yield return new WaitForSeconds(0.5f);
