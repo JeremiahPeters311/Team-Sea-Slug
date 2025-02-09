@@ -208,8 +208,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lives: 3
   _jumpHeight: 10
-  groundHorizontalMoveSpeed: 10
-  airHorizontalMoveSpeed: 10
+  groundHorizontalMoveSpeed: 4.5
+  airHorizontalMoveSpeed: 4.5
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
