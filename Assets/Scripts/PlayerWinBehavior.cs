@@ -14,7 +14,18 @@ public class PlayerWinBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (SceneManager.GetActiveScene().name == "WinScreen")
+        {
+            if(Input.GetKeyDown(KeyCode.Escape)) 
+            {
+                Application.Quit();
+            }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene("LevelDesign");
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
