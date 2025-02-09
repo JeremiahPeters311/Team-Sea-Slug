@@ -338,23 +338,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("EndAreaMarker"))
-        {
-            startAreaPos.x = collision.gameObject.transform.position.x;
-            nextRoom = true;
-        }
-    }
+    //Attempt at old camera solution
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("EndAreaMarker"))
-        {
-            startAreaPos.x = collision.gameObject.transform.position.x;
-            nextRoom = false;
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("EndAreaMarker"))
+    //    {
+    //        startAreaPos.x = collision.gameObject.transform.position.x;
+    //        nextRoom = true;
+    //    }
+    //}
+
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("EndAreaMarker"))
+    //    {
+    //        startAreaPos.x = collision.gameObject.transform.position.x;
+    //        nextRoom = false;
+    //    }
+    //}
 
     public void EnableControls() 
     {
