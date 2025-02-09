@@ -48,11 +48,17 @@ public class PlayerController : MonoBehaviour
     private bool _moveRight = false;
 
     [SerializeField] private float _maxTeleportDistance = 10f;
+    
+    //How far back the player can move. Position will update as player moves forward.
+    private Vector2 _playerMaxBackPos;
+    private Vector2 _currentCenter;
+    private Vector2 _updatePlayerPos;
+    [SerializeField]
+    private float _maxBackRange = 7f;
+    public bool playerMovingForward = true;
 
     public bool nextRoom = false;
     public Vector2 startAreaPos;
-
-    private int testCount = 0;
 
     [SerializeField] private float _cooldownTime = 1f;
     SpriteRenderer _spriteRenderer;
@@ -63,6 +69,9 @@ public class PlayerController : MonoBehaviour
         _playerReticle.SetActive(false);
         _playerControls = new PlayerControls();
         _reticlePosition = _playerReticle.transform.position;
+        _playerMaxBackPos = transform.position;
+        _currentCenter = transform.position;
+        _playerMaxBackPos.x -= _maxBackRange;
         _teleportCollision = _playerReticle.GetComponent<TeleportCollision>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -167,6 +176,24 @@ public class PlayerController : MonoBehaviour
         if (!_placingReticle)
         {
             MovePlayer();
+
+            if (transform.position.x >= _currentCenter.x)
+            {
+                _currentCenter = transform.position;
+                _playerMaxBackPos.x = transform.position.x - _maxBackRange;
+                playerMovingForward = true;
+            }
+            else
+            {
+                playerMovingForward = false;
+            }
+
+            if (transform.position.x <= _playerMaxBackPos.x)
+            {
+                _updatePlayerPos = transform.position;
+                _updatePlayerPos.x = _playerMaxBackPos.x;
+                transform.position = _updatePlayerPos;
+            }
         }
         else
         {

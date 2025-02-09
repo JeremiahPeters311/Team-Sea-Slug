@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
         {
             _playerPos = _player.transform.position;
 
-            if (_player.transform.position.x >= player.startAreaPos.x + _startAreaCameraOffset) 
+            if (_player.transform.position.x >= player.startAreaPos.x + _startAreaCameraOffset && player.playerMovingForward) 
             {
                 _camPos.x = _playerPos.x;
                 _mainCam.transform.position = _camPos; 
