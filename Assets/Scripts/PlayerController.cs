@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     GameObject _newspaperBulletPrefab;
 
     [SerializeField] private GameObject _playerReticle;
+    [SerializeField] private GameObject _teleportRange;
     private PlayerControls _playerControls;
     [SerializeField] private float _reticleSpeed = 0.3f;
     private Vector3 _reticlePosition;
@@ -67,11 +68,18 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float _cooldownTime = 1f;
     SpriteRenderer _spriteRenderer;
-
+    [SerializeField]
+    private string[] hurtPlayerCollisionTags;
+    [SerializeField]
+    private bool isInvulnerable = false;
+    [SerializeField]
+    private float invulnerabilitySeconds = 2;
 
     private void Awake()
     {
         _playerReticle.SetActive(false);
+        _teleportRange.SetActive(false);
+        _teleportRange.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
         _playerControls = new PlayerControls();
         _reticlePosition = _playerReticle.transform.position;
         _playerMaxBackPos = transform.position;
@@ -115,6 +123,7 @@ public class PlayerController : MonoBehaviour
         _playerControls.TeleportMap.Left.canceled -= ReticleLeftCancel;
         _playerControls.TeleportMap.Right.canceled -= ReticleRightCancel;
         _playerReticle.SetActive(false);
+        _teleportRange.SetActive(false);
         _playerControls.Disable();
     }
 
@@ -123,6 +132,7 @@ public class PlayerController : MonoBehaviour
         if (!_placingReticle && !_teleported)
         {
             _playerReticle.SetActive(true);
+            _teleportRange.SetActive(true);
             _placingReticle = true;
             playerAnimator.SetBool("TeleportPre", true);
             playerAnimator.SetBool("Walking", false);
@@ -149,6 +159,7 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(TeleportCooldown());
                 StartCoroutine(TeleportAnimation());
                 _playerReticle.SetActive(false);
+                _teleportRange.SetActive(false);
             }
         }
     }
@@ -263,6 +274,15 @@ public class PlayerController : MonoBehaviour
             }
 
             _playerReticle.transform.position = _reticlePosition;
+
+            if (!_teleportCollision.canTeleport || _reticlePosition.y < _worldBaseY)
+            {
+                _teleportRange.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0);
+            }
+            else
+            {
+                _teleportRange.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
+            }
         }
     }
 
@@ -418,11 +438,28 @@ public class PlayerController : MonoBehaviour
             platform = collision.gameObject.GetComponent<PassthroughPlatform>();
             platform.EnterPlatform();
         }
-        if (collision.gameObject.CompareTag("Projectile")) 
+        if (CheckEnemyTagMatch(collision.gameObject)) 
         {
-            _playerControls.Disable();
+            if (isInvulnerable) 
+            {
+                return;
+            }
+            isInvulnerable = true;
+            groundHorizontalMoveSpeed = 0;
             GameManager.Instance.PlayerDamage();
         }
+    }
+
+    private bool CheckEnemyTagMatch(GameObject collidedObject) 
+    {
+        foreach (string tag in hurtPlayerCollisionTags) 
+        {
+            if (collidedObject.CompareTag(tag)) 
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -438,9 +475,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void EnableControls() 
+    public IEnumerator EnableControls() 
     {
-        _playerControls.Disable();
+        groundHorizontalMoveSpeed = 4.5f;
+        float waitInterval = invulnerabilitySeconds / 60;
+        
+        for (int i = 0; i < 60; i++) 
+        {
+            _spriteRenderer.color = new Color(1, 1, 1, _spriteRenderer.color.a == 1 ? 0.15f : 1f);
+            yield return new WaitForSeconds(waitInterval);
+        }
+        _spriteRenderer.color = new Color(1, 1, 1, 1f);
+        isInvulnerable = false;
     }
 }
 

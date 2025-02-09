@@ -7,43 +7,29 @@ public class SkateboardSpawner : MonoBehaviour
     [SerializeField] private float spawnInterval;
     private float spawnTime;
 
-    [SerializeField] private GameObject rightSkateboard;
-    [SerializeField] private GameObject leftSkateboard;
-
-    [SerializeField] private bool spawnToRight;
-    [SerializeField] private bool spawnToLeft;
+    [SerializeField] private GameObject skateboard;
+    [SerializeField] private GameObject spawnZone;
 
     // Update is called once per frame
     void Update()
     {
-        spawnTime += Time.deltaTime;
-        if (spawnTime > spawnInterval && spawnToRight && !spawnToLeft)
-        {
-            SpawnRight();
-            spawnTime = 0f;
-        }
+    }
 
-        if (spawnTime > spawnInterval && !spawnToRight && spawnToLeft)
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
         {
-            SpawnLeft();
-            spawnTime = 0f;
+            SpawnCat();
         }
     }
 
     /// <summary>
     /// Function that spawns the potted plant to fall when it's time to do so
     /// </summary>
-    private void SpawnRight()
+    private void SpawnCat()
     {
-        var offset = new Vector3(1f, 0.1f, 0f);
+        var offset = new Vector3(0.1f, 0f, 0f);
 
-        Instantiate(rightSkateboard, gameObject.transform.position + offset, Quaternion.identity);
-    }
-
-    private void SpawnLeft()
-    {
-        var offset = new Vector3(-1f, 0.1f, 0f);
-
-        Instantiate(leftSkateboard, gameObject.transform.position + offset, Quaternion.identity);
+        Instantiate(skateboard, spawnZone.transform.position + offset, Quaternion.identity);
     }
 }
