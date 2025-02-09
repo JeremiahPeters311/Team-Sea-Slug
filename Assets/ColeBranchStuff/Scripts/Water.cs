@@ -28,9 +28,8 @@ public class Water : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name.Contains("Player"))
-        {
-            Destroy(gameObject);
-        }
+        if(!collision.gameObject.name.Contains("Water"))
+
+        Destroy(gameObject);
     }
 }
