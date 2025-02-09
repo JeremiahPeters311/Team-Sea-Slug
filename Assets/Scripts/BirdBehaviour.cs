@@ -10,6 +10,8 @@ public class BirdBehaviour : MonoBehaviour
 
     [SerializeField] private GameObject PlayerRef;
 
+    [SerializeField] private AudioClip pigeonCall;
+
     private bool IsAttacking = false;
 
     private void Update()
@@ -22,6 +24,7 @@ public class BirdBehaviour : MonoBehaviour
         if (Vector3.Distance(gameObject.transform.position, PlayerRef.transform.position) < PlayerDetectionRange)
         {
             IsAttacking = true;
+            SFXManager.instance.PlaySoundEffct(pigeonCall, transform, 1f);
             var step = BirdSpeed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, PlayerRef.transform.position, BirdSpeed * step);
         }

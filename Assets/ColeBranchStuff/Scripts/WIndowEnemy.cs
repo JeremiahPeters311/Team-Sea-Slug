@@ -4,20 +4,14 @@ using UnityEngine;
 
 public class PlantEnemy : MonoBehaviour
 {
-    [SerializeField] private float spawnInterval;
-    private float spawnTime;
-
     [SerializeField] private GameObject objectToDrop;
 
-    // Update is called once per frame
-    void Update()
+    private Animator anim;
+
+    private void Start()
     {
-        spawnTime += Time.deltaTime;
-        if (spawnTime > spawnInterval)
-        {
-            Spawn();
-            spawnTime = 0f;
-        }
+        anim = GetComponent<Animator>();
+        anim.enabled = false;
     }
 
     /// <summary>
@@ -28,5 +22,17 @@ public class PlantEnemy : MonoBehaviour
         var offset = new Vector3(0f, -0.2f, 0f);
 
         Instantiate(objectToDrop, gameObject.transform.position + offset, Quaternion.identity);
+    }
+
+    private void OnBecameVisible()
+    {
+        anim.enabled = true;
+        enabled = true;
+    }
+
+    private void OnBecameInvisible()
+    {
+        anim.enabled = false;
+        enabled = false;
     }
 }
