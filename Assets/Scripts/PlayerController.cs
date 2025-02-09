@@ -353,6 +353,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnPlayerJump(InputAction.CallbackContext context)
     {
+        Debug.Log(context);
         if (!_placingReticle)
         {
             if (context.started)
@@ -379,6 +380,7 @@ public class PlayerController : MonoBehaviour
 
     private void JumpAction()
     {
+        Debug.Log(IsTouchingLayer(groundLayer));
         if (IsTouchingLayer(platformLayer) && verticalDirection <= -1 && platform != null)
         {
             platform.SetPlayerFallThrough(true);
@@ -406,7 +408,7 @@ public class PlayerController : MonoBehaviour
     /// <returns></returns>
     private bool IsTouchingLayer(LayerMask layerMask)
     {
-        return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(2.86f, 0.1f), CapsuleDirection2D.Horizontal, 0, layerMask);
+        return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(0.61f, 0.04f), CapsuleDirection2D.Horizontal, 0, layerMask);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
