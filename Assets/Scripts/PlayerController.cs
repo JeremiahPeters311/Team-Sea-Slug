@@ -57,9 +57,6 @@ public class PlayerController : MonoBehaviour
     private float _maxBackRange = 7f;
     public bool playerMovingForward = true;
 
-    public bool nextRoom = false;
-    public Vector2 startAreaPos;
-
     [SerializeField] private float _cooldownTime = 1f;
     SpriteRenderer _spriteRenderer;
 
@@ -312,7 +309,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Entered: " + collision.gameObject.name);
         if (collision.gameObject.layer == LayerMask.NameToLayer("Platform"))
         {
             platform = collision.gameObject.GetComponent<PassthroughPlatform>();
@@ -337,26 +333,6 @@ public class PlayerController : MonoBehaviour
             platform = null;
         }
     }
-
-    //Attempt at old camera solution
-
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("EndAreaMarker"))
-    //    {
-    //        startAreaPos.x = collision.gameObject.transform.position.x;
-    //        nextRoom = true;
-    //    }
-    //}
-
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("EndAreaMarker"))
-    //    {
-    //        startAreaPos.x = collision.gameObject.transform.position.x;
-    //        nextRoom = false;
-    //    }
-    //}
 
     public void EnableControls() 
     {
