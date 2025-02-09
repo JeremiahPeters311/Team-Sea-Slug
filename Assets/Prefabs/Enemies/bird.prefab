@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6712521953460585092}
   - component: {fileID: 7497446214755759768}
   - component: {fileID: 1226048950752734720}
+  - component: {fileID: 3414495889550591519}
   m_Layer: 0
   m_Name: bird
   m_TagString: Untagged
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 2101145494, guid: da5bc080d15206d448868ee8f34f6743, type: 3}
+  m_Sprite: {fileID: 1020393478, guid: da5bc080d15206d448868ee8f34f6743, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,7 +98,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4283209bc5b8a2e4cb8b2831d213110c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BirdSpeed: 5
-  PlayerDetectionRange: 0.5
-  PlayerRef: {fileID: 6680031713736237270, guid: 0e232942e6dbde04aade6c4406228a17, type: 3}
+  BirdSpeed: 1
+  PlayerDetectionRange: 1.5
+  PlayerRef: {fileID: 0}
   pigeonCall: {fileID: 8300000, guid: 99f2b1555b6da5f409392798f00e9c3d, type: 3}
+--- !u!95 &3414495889550591519
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5902477145286853878}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c695e8d1190761e43a7229d779286339, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

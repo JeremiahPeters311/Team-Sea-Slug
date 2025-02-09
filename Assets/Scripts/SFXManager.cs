@@ -15,7 +15,7 @@ public class SFXManager : MonoBehaviour
 {
     public static SFXManager instance;
 
-    [SerializeField] private AudioSource soundeffectobject;
+    [SerializeField] public AudioSource soundeffectobject;
 
     private void Awake()
     {
