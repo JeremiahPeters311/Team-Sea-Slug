@@ -50,6 +50,9 @@ public class PlayerController : MonoBehaviour
     private bool _lookingUp = false;
     private bool _lookingDown = false;
 
+    //Prevents the player from teleporting beneath the level.
+    [SerializeField] private float _worldBaseY = -1.255f;
+
     public Animator playerAnimator;
 
     [SerializeField] private float _maxTeleportDistance = 10f;
@@ -137,7 +140,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (_teleportCollision.canTeleport && !_teleported)
+            if (_teleportCollision.canTeleport && !_teleported && _reticlePosition.y >= _worldBaseY)
             {
                 transform.position = _reticlePosition;
                 _teleported = true;
@@ -321,11 +324,13 @@ public class PlayerController : MonoBehaviour
                 {
                     playerAnimator.SetBool("WalkingLookUp", true);
                     playerAnimator.SetBool("LookUp", false);
+                    playerAnimator.SetBool("Walking", false);
                 }
                 if (horizontalVelocity == 0)
                 {
                     playerAnimator.SetBool("LookUp", true);
                     playerAnimator.SetBool("WalkingLookUp", false);
+                    playerAnimator.SetBool("Walking", false);
                 }
             }
             if (_lookingDown && !_lookingUp)
@@ -334,11 +339,13 @@ public class PlayerController : MonoBehaviour
                 {
                     playerAnimator.SetBool("WalkingLookDown", true);
                     playerAnimator.SetBool("LookDown", false);
+                    playerAnimator.SetBool("Walking", false);
                 }
                 if (horizontalVelocity == 0)
                 {
                     playerAnimator.SetBool("LookDown", true);
                     playerAnimator.SetBool("WalkingLookDown", false);
+                    playerAnimator.SetBool("Walking", false);
                 }
             }
         }
