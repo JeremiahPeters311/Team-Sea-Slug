@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     PassthroughPlatform platform;
 
+    [SerializeField] private AudioClip teleport;
+
     Rigidbody2D rb;
     Vector2 _smoothMovementVelocity, _currentVelocityVector;
 
@@ -132,6 +134,7 @@ public class PlayerController : MonoBehaviour
             {
                 transform.position = _reticlePosition;
                 _teleported = true;
+                SFXManager.instance.PlaySoundEffct(teleport, transform, 1f);
                 StartCoroutine(TeleportCooldown());
                 _playerReticle.SetActive(false);
             }

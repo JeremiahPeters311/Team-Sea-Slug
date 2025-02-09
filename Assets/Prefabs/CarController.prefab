@@ -150,6 +150,7 @@ MonoBehaviour:
   LightObjRef: {fileID: 445954896750018474}
   CarTimer: 3
   CarDuration: 1
+  carHorn: {fileID: 8300000, guid: c8087c943e8d1b94eadcf1d16bed13ee, type: 3}
 --- !u!1 &6919203543632133655
 GameObject:
   m_ObjectHideFlags: 0
