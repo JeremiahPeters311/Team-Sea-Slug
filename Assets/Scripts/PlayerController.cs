@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     GameObject _newspaperBulletPrefab;
 
     [SerializeField] private GameObject _playerReticle;
+    [SerializeField] private GameObject _teleportRange;
     private PlayerControls _playerControls;
     [SerializeField] private float _reticleSpeed = 0.3f;
     private Vector3 _reticlePosition;
@@ -72,6 +73,8 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _playerReticle.SetActive(false);
+        _teleportRange.SetActive(false);
+        _teleportRange.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
         _playerControls = new PlayerControls();
         _reticlePosition = _playerReticle.transform.position;
         _playerMaxBackPos = transform.position;
@@ -115,6 +118,7 @@ public class PlayerController : MonoBehaviour
         _playerControls.TeleportMap.Left.canceled -= ReticleLeftCancel;
         _playerControls.TeleportMap.Right.canceled -= ReticleRightCancel;
         _playerReticle.SetActive(false);
+        _teleportRange.SetActive(false);
         _playerControls.Disable();
     }
 
@@ -123,6 +127,7 @@ public class PlayerController : MonoBehaviour
         if (!_placingReticle && !_teleported)
         {
             _playerReticle.SetActive(true);
+            _teleportRange.SetActive(true);
             _placingReticle = true;
             playerAnimator.SetBool("TeleportPre", true);
             playerAnimator.SetBool("Walking", false);
@@ -149,6 +154,7 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(TeleportCooldown());
                 StartCoroutine(TeleportAnimation());
                 _playerReticle.SetActive(false);
+                _teleportRange.SetActive(false);
             }
         }
     }
@@ -263,6 +269,15 @@ public class PlayerController : MonoBehaviour
             }
 
             _playerReticle.transform.position = _reticlePosition;
+
+            if (!_teleportCollision.canTeleport || _reticlePosition.y < _worldBaseY)
+            {
+                _teleportRange.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0);
+            }
+            else
+            {
+                _teleportRange.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
+            }
         }
     }
 
