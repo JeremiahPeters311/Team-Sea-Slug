@@ -11,6 +11,7 @@ public class Manhole : MonoBehaviour
     private float waterTime;
 
     private bool waterCount;
+    private bool visible;
 
     [SerializeField] private float launchForce;
 
@@ -27,12 +28,15 @@ public class Manhole : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    { 
         spawnTime += Time.deltaTime;
         if (spawnTime > spawnInterval)
         {
-            Launch();
-            spawnTime = 0f;
+            if(visible)
+            {
+                Launch();
+                spawnTime = 0f;
+            }
         }
 
         if (waterCount)
@@ -72,5 +76,15 @@ public class Manhole : MonoBehaviour
         Instantiate(rightDrop, gameObject.transform.position + offset6, rightDrop.transform.rotation);
 
         waterCount = false;
+    }
+
+    private void OnBecameVisible()
+    {
+        visible = true;
+    }
+
+    private void OnBecameInvisible()
+    {
+        visible = false;
     }
 }
