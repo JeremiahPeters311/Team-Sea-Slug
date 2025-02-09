@@ -42,11 +42,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _reticleSpeed = 0.3f;
     private Vector3 _reticlePosition;
     [SerializeField] private bool _placingReticle = false;
+    private bool _teleported = false;
     private TeleportCollision _teleportCollision;
     private bool _moveUp = false;
     private bool _moveDown = false;
     private bool _moveLeft = false;
     private bool _moveRight = false;
+
+    [SerializeField] private float _maxTeleportDistance = 10f;
+
+    private int testCount = 0;
+
+    [SerializeField] private float _cooldownTime = 1f;
 
     private void Awake()
     {
@@ -86,7 +93,7 @@ public class PlayerController : MonoBehaviour
 
     private void TeleportReticleInput(InputAction.CallbackContext obj)
     {
-        if (!_placingReticle && _gameManager.teleportMeter >= 2f)
+        if (!_placingReticle) //&& _gameManager.teleportMeter >= 2f)
         {
             _playerReticle.SetActive(true);
             _placingReticle = true;
@@ -102,10 +109,11 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (_teleportCollision.canTeleport && _gameManager.teleportMeter >= 2f)
+            if (_teleportCollision.canTeleport && !_teleported) //&& _gameManager.teleportMeter >= 2f)
             {
                 transform.position = _reticlePosition;
-                _placingReticle = false;
+                _teleported = true;
+                StartCoroutine(TeleportCooldown());
                 _gameManager.teleportMeter -= 2f;
                 _playerReticle.SetActive(false);
             }
@@ -145,6 +153,13 @@ public class PlayerController : MonoBehaviour
         _moveRight = false;
     }
 
+    private IEnumerator TeleportCooldown()
+    {
+        yield return new WaitForSeconds(_cooldownTime);
+        _placingReticle = false;
+        _teleported = false;
+    }
+
     private void FixedUpdate()
     {
         if (!_placingReticle)
@@ -169,6 +184,27 @@ public class PlayerController : MonoBehaviour
             {
                 _reticlePosition.x += _reticleSpeed;
             }
+
+            if (_reticlePosition.y >= transform.position.y + _maxTeleportDistance)
+            {
+                _reticlePosition.y = transform.position.y + _maxTeleportDistance;
+            }
+
+            if (_reticlePosition.y <= transform.position.y - _maxTeleportDistance)
+            {
+                _reticlePosition.y = transform.position.y - _maxTeleportDistance;
+            }
+
+            if (_reticlePosition.x >= transform.position.x + _maxTeleportDistance)
+            {
+                _reticlePosition.x = transform.position.x + _maxTeleportDistance;
+            }
+
+            if (_reticlePosition.x <= transform.position.x - _maxTeleportDistance)
+            {
+                _reticlePosition.x = transform.position.x - _maxTeleportDistance;
+            }
+
             _playerReticle.transform.position = _reticlePosition;
         }
     }

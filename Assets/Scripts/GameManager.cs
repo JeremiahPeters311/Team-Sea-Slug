@@ -29,6 +29,24 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private TMP_Text _meterText;
 
+    [SerializeField]
+    private Camera _mainCam;
+    [SerializeField]
+    private GameObject _nextRoomCheck;
+    private RoomCheckerCollision _roomCheckerCollision;
+    [SerializeField]
+    private GameObject _player;
+    [SerializeField]
+    private float _checkAdjust = 10f;
+    [SerializeField]
+    private float _screenWidthSize = 23f;
+    [SerializeField]
+    private float _cameraAdjust = 18f;
+
+    private Vector2 _roomCheckPos;
+    private Vector2 _playerPos;
+    private Vector2 _camPos;
+
     public UnityEvent onPlayerGameOver;
     PlayerController player;
 
@@ -36,23 +54,43 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        _roomCheckerCollision = _nextRoomCheck.GetComponent<RoomCheckerCollision>();
+    }
+
+    private void Awake()
+    {
+        _roomCheckPos = _nextRoomCheck.transform.position;
+        _playerPos = _player.transform.position;
+        //_camPos = _mainCam.transform.position;
+        _roomCheckPos.x = _playerPos.x + _checkAdjust;
+        _nextRoomCheck.transform.position = _roomCheckPos;
     }
 
     private void FixedUpdate()
     {
-        if (teleportMeter < 10)
-        {
-            teleportMeter += _refillRate;
-        }
+        //if (teleportMeter < 10)
+        //{
+        //teleportMeter += _refillRate;
+        //}
 
-        _meterText.text = "Meter:" + teleportMeter.ToString();
+        //_meterText.text = "Meter:" + teleportMeter.ToString();
 
-        if (teleportMeter <= 10)
+        //if (teleportMeter <= 10)
+        //{
+        //return;
+        //}
+
+        //teleportMeter = 10;
+
+        if (!_roomCheckerCollision.nextRoom)
         {
             return;
         }
 
-        teleportMeter = 10;
+        _roomCheckPos.x += _screenWidthSize;
+        _nextRoomCheck.transform.position = _roomCheckPos;
+        //_camPos.x += _cameraAdjust;
+        //_mainCam.transform.position = _camPos;
     }
 
     public void RestartGame() 
