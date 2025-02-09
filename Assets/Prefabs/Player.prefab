@@ -209,7 +209,6 @@ MonoBehaviour:
   _jumpHeight: 10
   groundHorizontalMoveSpeed: 10
   airHorizontalMoveSpeed: 10
-  _isGrounded: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -218,6 +217,7 @@ MonoBehaviour:
     m_Bits: 64
   groundCheck: {fileID: 8348112863721753543}
   platform: {fileID: 0}
+  _newspaperBulletPrefab: {fileID: 0}
   _playerReticle: {fileID: 9160855261751938352}
   _reticleSpeed: 0.3
   _placingReticle: 0
@@ -279,7 +279,19 @@ MonoBehaviour:
     m_ActionId: 888cae2e-ab12-4dff-ae4b-d47fbc611641
     m_ActionName: PlayerActionMap/Jump[/Keyboard/z]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1181187835406146056}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnPlayerFire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: e6213ae3-02bb-4711-85fb-7490b7e98be9
     m_ActionName: PlayerActionMap/Shoot[/Keyboard/x]
   - m_PersistentCalls:
@@ -302,6 +314,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 8579d194-6534-46c0-a3a9-9be0241af28f
     m_ActionName: TeleportMap/Right[/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_ActionId: 95b3ec3e-8383-4429-b2c1-7e993a9b024a
+    m_ActionName: PlayerActionMap/Pause[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerActionMap
