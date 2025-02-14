@@ -42,7 +42,7 @@ public class SpawnManager : MonoBehaviour
         {
             if (existingEnemiesInScene.Count < _maxEnemies)
             {
-                var instantiatedEnemy = Instantiate(_officeWorkerPrefab, existingNodesStack[i].transform);
+                var instantiatedEnemy = Instantiate(_officeWorkerPrefab, existingNodesStack[i].gameObject.transform);
                 existingEnemiesInScene.Add(instantiatedEnemy);
                 existingNodesStack[i].PushEnemyOnNode(instantiatedEnemy);
             }

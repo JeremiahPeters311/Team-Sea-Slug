@@ -30,6 +30,6 @@ public class SpawnNodeScript : MonoBehaviour
 
     public void PushEnemyOnNode(GameObject enemy) 
     {
-        enemy.transform.position += Vector3.up;
+        enemy.transform.position += Vector3.zero;
     }
 }

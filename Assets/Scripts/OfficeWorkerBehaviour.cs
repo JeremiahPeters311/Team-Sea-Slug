@@ -25,7 +25,7 @@ public class OfficeWorkerBehaviour : MonoBehaviour
     {
         if (!Anim.GetBool("throw"))
         {
-            transform.Translate(Vector3.right * WalkSpeed * Time.deltaTime);
+            transform.Translate(Time.deltaTime * WalkSpeed * Vector3.left);
         }
 
         if (Vector3.Distance(gameObject.transform.position, PlayerRef.transform.position) < PlayerDetectionRange)
