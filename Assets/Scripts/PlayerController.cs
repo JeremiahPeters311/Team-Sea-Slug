@@ -133,6 +133,7 @@ public class PlayerController : MonoBehaviour
         _teleportRange.SetActive(false);
         _playerControls.Disable();
     }
+    #region TeleportFunctions
 
     private void TeleportReticleInput(InputAction.CallbackContext obj)
     {
@@ -218,6 +219,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         playerAnimator.SetBool("TeleportPost", false);
     }
+    #endregion
 
     private void FixedUpdate()
     {
@@ -294,7 +296,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
+    #region PlayerInputEvents
     /// <summary>
     /// Read Player Input from Input Action
     /// </summary>
@@ -388,7 +390,7 @@ public class PlayerController : MonoBehaviour
             if (context.started)
             {
                 JumpAction();
-                playerAnimator.SetBool("Jump", true);
+                
             }
             else if (context.canceled)
             {
@@ -416,6 +418,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (IsTouchingLayer(groundLayer) || IsTouchingLayer(platformLayer))
         {
+            playerAnimator.SetBool("Jump", true);
             _smoothMovementVelocity.y = _jumpHeight;
         }
 
@@ -439,6 +442,7 @@ public class PlayerController : MonoBehaviour
     {
         return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(0.61f, 0.04f), CapsuleDirection2D.Horizontal, 0, layerMask);
     }
+    #endregion
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

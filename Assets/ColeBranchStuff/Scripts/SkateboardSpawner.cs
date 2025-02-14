@@ -13,6 +13,7 @@ public class SkateboardSpawner : MonoBehaviour
     private void Start()
     {
         spawnZone = GameObject.Find("CatSpawnZone");
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

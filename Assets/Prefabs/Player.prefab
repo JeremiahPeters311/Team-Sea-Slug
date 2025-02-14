@@ -232,7 +232,11 @@ MonoBehaviour:
   _cooldownTime: 1
   hurtPlayerCollisionTags:
   - Projectile
-  - UnloadedEnemy
+  isInvulnerable: 0
+  invulnerabilitySeconds: 2
+  _defaultTime: 1
+  _slowedTime: 0.2
+  gameOver: 0
 --- !u!114 &8807848524845751809
 MonoBehaviour:
   m_ObjectHideFlags: 0
