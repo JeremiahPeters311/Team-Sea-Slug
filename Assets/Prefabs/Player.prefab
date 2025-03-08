@@ -219,9 +219,10 @@ MonoBehaviour:
     m_Bits: 64
   groundCheck: {fileID: 8348112863721753543}
   platform: {fileID: 0}
-  _newspaperBulletPrefab: {fileID: 0}
+  _newspaperBulletPrefab: {fileID: 4719082288354611359, guid: 0f41450ceee019d49a2df3f41521ad13, type: 3}
   _playerReticle: {fileID: 9160855261751938352}
   _teleportRange: {fileID: 8530891506554358823}
+  playerInput: {fileID: 0}
   _reticleSpeed: 0.3
   _placingReticle: 0
   _worldBaseY: -1.255

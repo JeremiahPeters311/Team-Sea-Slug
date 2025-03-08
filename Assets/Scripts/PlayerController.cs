@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject _playerReticle;
     [SerializeField] private GameObject _teleportRange;
     private PlayerControls _playerControls;
+    [SerializeField]
+    private PlayerInput playerInput;
     [SerializeField] private float _reticleSpeed = 0.3f;
     private Vector3 _reticlePosition;
     [SerializeField] private bool _placingReticle = false;
@@ -94,6 +96,8 @@ public class PlayerController : MonoBehaviour
         _teleportCollision = _playerReticle.GetComponent<TeleportCollision>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         playerAnimator = GetComponent<Animator>();
+        playerInput = GetComponent<PlayerInput>();
+        playerInput.DeactivateInput();
         _playerControls.PlayerActionMap.Disable();
         Time.timeScale = _defaultTime;
     }
@@ -107,8 +111,8 @@ public class PlayerController : MonoBehaviour
     {
         airHorizontalMoveSpeed = 4.5f;
         groundHorizontalMoveSpeed = 4.5f;
-
         yield return null;
+        playerInput.ActivateInput();
     }
 
     private void OnEnable()
@@ -225,6 +229,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!_placingReticle)
         {
+            
             MovePlayer();
 
             if (transform.position.x >= _currentCenter.x)
@@ -457,6 +462,7 @@ public class PlayerController : MonoBehaviour
             {
                 return;
             }
+            playerInput.DeactivateInput();
             isInvulnerable = true;
             groundHorizontalMoveSpeed = 0;
             GameManager.Instance.PlayerDamage();
@@ -492,6 +498,9 @@ public class PlayerController : MonoBehaviour
     {
         groundHorizontalMoveSpeed = 4.5f;
         float waitInterval = invulnerabilitySeconds / 60;
+
+        yield return null;
+        playerInput.ActivateInput();
         
         for (int i = 0; i < 60; i++) 
         {

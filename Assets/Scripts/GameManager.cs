@@ -78,10 +78,8 @@ public class GameManager : MonoBehaviour
         //TODO: Place code here to trigger the player fall over animation
 
         yield return new WaitForSeconds(_playerHitWaitDelay);
-
         if (_lives <= 0)
         {
-            player.playerAnimator.SetBool("Damage", false);
             player.playerAnimator.SetBool("Die", true);
             player.gameOver = true;
             onPlayerGameOver.Invoke();
