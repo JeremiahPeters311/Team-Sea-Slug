@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lives: 3
-  _jumpHeight: 10
+  _jumpHeight: 4
   groundHorizontalMoveSpeed: 4.5
   airHorizontalMoveSpeed: 4.5
   groundLayer:
