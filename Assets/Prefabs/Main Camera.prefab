@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1958162605198814639}
@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyTag: Projectile
+  destroyPlayerTag: PlayerProjectile
   debugCollisions: 1
 --- !u!61 &2733223804842819069
 BoxCollider2D:
@@ -216,7 +217,7 @@ Transform:
   m_GameObject: {fileID: 973425032614645719}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.2566, y: -0.7139001, z: 10}
+  m_LocalPosition: {x: 2.46, y: -0.72, z: 10}
   m_LocalScale: {x: 0.2672, y: 0.1922, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -320,6 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyTag: Projectile
+  destroyPlayerTag: PlayerProjectile
   debugCollisions: 1
 --- !u!61 &6629784161893701613
 BoxCollider2D:
@@ -412,6 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyTag: UnloadableEnemy
+  destroyPlayerTag: PlayerProjectile
   debugCollisions: 1
 --- !u!61 &5442256374394802139
 BoxCollider2D:
@@ -445,7 +448,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.23, y: 0.013127089}
+  m_Offset: {x: 0.22634141, y: 0.013127327}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -456,7 +459,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.004242897, y: 12.642847}
+  m_Size: {x: 0.011560053, y: 12.642847}
   m_EdgeRadius: 0
 --- !u!1 &6170077828449240893
 GameObject:
@@ -504,6 +507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyTag: Projectile
+  destroyPlayerTag: PlayerProjectile
   debugCollisions: 1
 --- !u!61 &2091050050388259005
 BoxCollider2D:
@@ -596,6 +600,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyTag: Projectile
+  destroyPlayerTag: PlayerProjectile
   debugCollisions: 1
 --- !u!61 &4081943586885701937
 BoxCollider2D:

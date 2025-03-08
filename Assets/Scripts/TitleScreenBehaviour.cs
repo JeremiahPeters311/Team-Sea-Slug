@@ -30,11 +30,15 @@ public class TitleScreenScrolling : MonoBehaviour
 
     private PlayerControls _playerControls;
 
+    Coroutine startCoroutine;
+
     private void Awake()
     {
         _playerControls = new PlayerControls();
-        _playerControls.PlayerActionMap.StartGame.performed += ctx => StartCoroutine(IntroTiming());
+        _playerControls.PlayerActionMap.StartGame.performed += ctx => startCoroutine = startCoroutine == null ? StartCoroutine(IntroTiming()) : startCoroutine;
     }
+
+
 
     private IEnumerator IntroTiming()
     {
@@ -50,7 +54,7 @@ public class TitleScreenScrolling : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         StartCoroutine(RealPlayer.GetComponent<PlayerController>().ControlsDuringTitleScreen());
-
+        yield return null;
         Destroy(gameObject);
     }
 

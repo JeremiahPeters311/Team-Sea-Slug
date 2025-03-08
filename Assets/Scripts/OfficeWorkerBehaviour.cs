@@ -18,6 +18,7 @@ public class OfficeWorkerBehaviour : MonoBehaviour
 
     private void Start()
     {
+        PlayerRef = GameObject.FindGameObjectWithTag("Player");
         Anim = gameObject.GetComponent<Animator>();
         StartCoroutine(WaitTimer(2f));
     }
@@ -71,10 +72,11 @@ public class OfficeWorkerBehaviour : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "PlayerProjectile")
+        if (collision.gameObject.CompareTag("PlayerProjectile"))
         {
+            Destroy(collision.gameObject);
+            WalkSpeed = 0;
             Anim.SetBool("hit", true);
-            gameObject.GetComponent<BoxCollider2D>().size = new Vector2(0.15f, 0.1f);
             StartCoroutine(DeathTimer(0.75f));
         }
     }
